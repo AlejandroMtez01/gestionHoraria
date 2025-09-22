@@ -7,6 +7,7 @@
     <title>Página Principal</title>
     <link rel="stylesheet" href="/GestionHoraria/css/style.css">
     <link rel="stylesheet" href="/GestionHoraria/css/modal.css">
+    <script src="/GestionHoraria/js/eventosFormularios.js"></script>
 
 </head>
 

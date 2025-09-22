@@ -155,97 +155,11 @@ if ($edicion) {
 
 </div>
 
-<script>
-
-</script>
 
 
 
 <script>
-    // Get the modal
-    var modal = document.getElementById("modal");
+    cambioEnFormulario(document.getElementById("form1"));
 
-
-    // Get the <span> element that closes the modal
-
-
-
-    function confirmarSalida(pagina) {
-        const respuesta = confirm("¿Estás seguro de que desea salir?");
-        if (respuesta) {
-            window.location.href = pagina;
-        } else {}
-    }
-    var formulario = document.getElementById("form1");
-    cambioEnFormulario(formulario);
-
-    function cambioEnFormulario(formulario) {
-
-
-        // Detectar cambios en cualquier campo
-        formulario.addEventListener('input', function() {
-            cambiosRealizados = true;
-            //console.log('Se detectaron cambios en el formulario');
-        });
-
-        // También puedes detectar cambios específicos por tipo de campo
-        formulario.addEventListener('change', function(e) {
-            console.log(`Campo cambiado: ${e.target.name}`);
-            cambiosRealizados = true;
-        });
-    }
-
-
-
-    let cambiosRealizados = false;
-
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-
-
-        if (event.target == modal) {
-
-            var formulario = document.getElementById("form1");
-
-            var pagina = "<?php
-                            if (isset($_GET["idAlumno"])) {
-                                echo $_SESSION["pagina"] . ".php?idAlumno=" . $idAlumno;
-                            } else {
-                                echo "../" . $_SESSION["pagina"] . ".php";
-                            }
-
-                            ?>"
-
-
-            if (cambiosRealizados) {
-                confirmarSalida(pagina);
-            } else {
-                window.location.href = pagina;
-
-            }
-
-
-
-
-
-
-
-        }
-    }
-
-    function confirmarDesecharCambiosFormulario(formulario, boolean) {
-        formulario.addEventListener('input', () => {
-            cambiosRealizados = true
-        });
-    }
+    clickFueraModalConPreguntaModificacion();
 </script>
-
-<?php
-
-
-
-// if ($cambiarPagina) {
-//     header("Location: " . "index" . ".php");
-// } 
-?>
