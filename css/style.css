@@ -1,0 +1,80 @@
+body {
+  background-color: blanchedalmond;
+}
+
+div.panelPrincipal {
+  padding: 10px;
+  background-color: cornsilk;
+  border: 1px solid gray;
+}
+div.panelPrincipal h3 {
+  text-align: center;
+}
+div.panelPrincipal .estadisticas {
+  display: flex;
+  gap: 50px;
+  margin: 50px 20px;
+  justify-content: center;
+}
+div.panelPrincipal .estadisticas .estadistica {
+  display: block;
+  border: 1px solid gray;
+  padding: 10px 5px;
+  border-radius: 7.5px;
+  margin: 5px 5px;
+}
+div.panelPrincipal .estadisticas .estadistica #bbdd {
+  font-weight: 600;
+}
+div.panelPrincipal .objetivosMensuales {
+  display: flex;
+  justify-content: center;
+  border: 1px solid gray;
+  padding: 50px;
+}
+div.panelPrincipal .objetivosMensuales .gridDual {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 20fr;
+}
+div.panelPrincipal .objetivosMensuales .gridDual .itemTitulo,
+div.panelPrincipal .objetivosMensuales .gridDual .calendarioTitulo {
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+}
+div.panelPrincipal .objetivosMensuales .gridDual .diasMes {
+  display: flex;
+  gap: 3px;
+}
+div.panelPrincipal .objetivosMensuales .gridDual .diasMes .dia {
+  padding: 15px;
+  border: 1px solid gray;
+  width: 10px;
+  height: 10px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+div.panelPrincipal .objetivosMensuales .gridDual .item {
+  display: flex;
+  align-items: center;
+}
+div.panelPrincipal .objetivosMensuales .gridDual .calendario {
+  display: flex;
+  gap: 3px;
+}
+div.panelPrincipal .objetivosMensuales .gridDual .calendario .calendarioItem {
+  width: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  border: 1px solid gray;
+  height: 10px;
+}
+div.panelPrincipal .objetivosMensuales .gridDual .calendario .calendarioItem.especial {
+  background-color: rgba(255, 220, 220, 0.829);
+}/*# sourceMappingURL=style.css.map */

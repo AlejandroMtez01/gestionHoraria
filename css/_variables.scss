@@ -1,0 +1,112 @@
+﻿$colorFondo: rgb(255, 243, 227);
+$colorFondo1: #F4F4F5;
+$fuente: 'Inter';
+$colorBorde: rgb(226, 226, 226);
+$bgCalendarioMes: #ff355e;
+$bgCalendarioDia: white;
+$colorCalendarioMes: white;
+$colorCalendarioDia: black;
+
+/*-----------*/
+$colorHoverFlecha: #c9c9c9;
+$colorHoverMenu : #E3E4E5;
+$colorBorderHoverMenu: gray;
+$colorBorde : #F4F4F5;
+/*-----------*/
+$margen_Top_Bottom_SubBotones: 12px;
+/*-----------*/
+
+$colorEnlaces_FilaEspaciada: rgb(31, 31, 31);
+$colorBordeEnlaces_FilaEspaciada: rgb(30, 30, 49);
+
+$BordeEnlaces_FilaEspaciada: 2px solid $colorBordeEnlaces_FilaEspaciada;
+
+$colorEnlaces-Hover_FilaEspaciada: rgb(54, 32, 32);
+;
+$colorBordeEnlaces-Hover_FilaEspaciada: darkred;
+
+$heightFilasSuperiores: 60px;
+
+/*Estilo Colores*/
+$estilo1BG: rgba(255, 215, 223, 1);
+$estilo1FG: rgba(255, 53, 94, 1);
+
+$estilo2BG: rgba(255, 223, 205, 1);
+$estilo2FG: rgba(255, 145, 83, 1);
+
+$estilo3BG: rgba(212, 245, 201, 1);
+$estilo3FG: rgba(104, 204, 69, 1);
+
+$estilo4BG: rgba(225, 223, 250, 1);
+$estilo4FG: rgba(135, 127, 237, 1);
+
+$estilo5BG: rgba(201, 241, 245, 1);
+$estilo5FG: rgba(7, 162, 173, 1);
+
+$estilo6BG: rgb(252, 199, 249);
+$estilo6FG: rgb(206, 95, 200);
+
+$estilo7BG: rgba(204, 230, 255, 1);
+$estilo7FG: rgba(71, 167, 255, 1);
+
+
+
+
+
+$heightFlecha: 12px;
+$widthFlecha: 12px;
+
+$boxShadowPanel: 0px 4px 12px -8px $colorBorde, 0px 1px 3px $colorBorde;
+
+@mixin tamañoFlechas() {
+    height: $heightFlecha;
+    width: $widthFlecha;
+    margin: auto auto;
+}
+
+@mixin logoEmpresa() {
+    width: 120px;
+    display: block;
+    height: 40px;
+    margin: auto auto;
+    padding-bottom: calc(50px + 12px);
+}
+
+@mixin fuente($weight, $size, $color) {
+    font-weight: $weight;
+    font-size: $size;
+    color: $color;
+}
+
+@mixin alinearFlexCentrado {
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin mesCalendario() {
+    font-family: 'Inter';
+    font-weight: 700;
+    font-size: 8px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+@mixin diaCalendario() {
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 16px;
+}
+
+@mixin festivoCalendario() {
+    font-family: 'Inter';
+    font-weight: 500;
+    font-size: 14px;
+    color: rgb(30, 30, 49);
+}
+
+@mixin restanteCalendario() {
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 14px;
+    color: rgb(81, 81, 100);
+}

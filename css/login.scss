@@ -1,0 +1,176 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    height: 100%;
+    background-color: white;
+    display: flex;
+    font-family: "Inter", serif;
+}
+
+div.pagina {
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+    margin: auto auto;
+    min-height: 98vh;
+
+
+
+    div.subpagina {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        background-color: black;
+        width: 98%;
+        margin: auto auto;
+
+        min-height: 98vh;
+        border: 1px solid rgb(209, 209, 209);
+        margin: 1px;
+
+
+        div.alertas {
+
+            div.error {
+                padding: 1%;
+                border: 3px solid darkred;
+
+                border-radius: 5px;
+                background-color: #e4e4e4;
+
+                span {
+                    color: darkred;
+                    font-weight: 700;
+                }
+            }
+
+            div.exito {
+                padding: 1%;
+                border: 3px solid rgb(0, 139, 19);
+                border-radius: 5px;
+                background-color: #e9f8e9;
+
+                span {
+                    color: rgb(0, 139, 19);
+                    font-weight: 700;
+                }
+            }
+        }
+    }
+
+
+
+
+
+    div.seccion1 {
+        //En esta sección se montará la 
+        border-right: 1px solid rgb(247, 247, 247);
+        height: 100%;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        margin: auto auto;
+        background-color: #ffbbbb;
+        opacity: 1;
+        background: repeating-linear-gradient(-45deg, #fffaf7, #fffaf7 10px, #ffbbbb 10px, #ffbbbb 50px);
+
+        .contenido {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* Alineación horizontal */
+            align-items: center;
+            margin: auto auto;
+            // min-height: 98vh;
+            padding: 50px;
+
+            border: 1px solid rgb(207, 207, 207);
+            box-shadow: 5px 10px #888888;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.89);
+
+            form {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                /* Alineación horizontal */
+                align-items: center;
+
+
+                .input {
+                    position: relative;
+
+                    input[type=text],
+                    input[type=password] {
+                        padding: 10px;
+                        width: 20vi;
+                        height: 3vh;
+                        font-family: "Inter", serif;
+                        border-radius: 5px;
+                        border: 1px solid rgb(190, 190, 190);
+                        border-radius: 5px;
+                        padding-right: 50px;
+
+
+
+                        &:focus {
+                            outline: none;
+                            border: 2px solid #30a2ff;
+
+                        }
+
+                    }
+
+                    i {
+                        position: absolute;
+                        right: 5px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        font-size: 20px;
+                        /* Ajusta el tamaño del ícono */
+                        background-color: white;
+                        z-index: 1;
+                        color: rgb(134, 134, 134);
+                        padding: 5px;
+
+                        /* Color del ícono */
+                    }
+                }
+
+                input[type=submit] {
+                    font-family: "Inter", serif;
+                    width: 100%;
+                    padding: 20px;
+                    background-color: #30a2ff;
+                    border: 1px solid rgb(223, 223, 223);
+                    border-radius: 5px;
+                    color: white;
+
+                }
+
+
+
+
+            }
+
+            div,
+            h1,
+            form>input {
+                padding: 10px 0px;
+                margin: 10px 0px;
+            }
+
+        }
+    }
+
+    div.seccion2 {
+        background: -webkit-linear-gradient(90deg, #657d99 10%, #fccb6e 90%);
+        background: -moz-linear-gradient(90deg, #657d99 10%, #fccb6e 90%);
+        background: -ms-linear-gradient(90deg, #657d99 10%, #fccb6e 90%);
+        background: -o-linear-gradient(90deg, #657d99 10%, #fccb6e 90%);
+        background: linear-gradient(90deg, #657d99 10%, #fccb6e 90%);
+
+    }
+}
