@@ -16,10 +16,46 @@ function obtenerMesActual()
     for ($dia = 1; $dia <= $dias_mes; $dia++) {
 ?>
         <div class="calendarioItem"></div>
-        <?php
+<?php
     }
 }
 
+function obtenerMesDescripcionSegunParametro($numero_mes) {
+    $meses = [
+        1 => 'Enero',
+        2 => 'Febrero',
+        3 => 'Marzo',
+        4 => 'Abril',
+        5 => 'Mayo',
+        6 => 'Junio',
+        7 => 'Julio',
+        8 => 'Agosto',
+        9 => 'Septiembre',
+        10 => 'Octubre',
+        11 => 'Noviembre',
+        12 => 'Diciembre'
+    ];
+    
+    return $meses[$numero_mes] ?? 'Mes inválido';
+}
+function obtenerMesDescripcion() {
+    $meses = [
+        1 => 'Enero',
+        2 => 'Febrero',
+        3 => 'Marzo',
+        4 => 'Abril',
+        5 => 'Mayo',
+        6 => 'Junio',
+        7 => 'Julio',
+        8 => 'Agosto',
+        9 => 'Septiembre',
+        10 => 'Octubre',
+        11 => 'Noviembre',
+        12 => 'Diciembre'
+    ];
+    
+    return $meses[date('n')] ?? 'Mes inválido';
+}
 function diasMes()
 {
 
@@ -30,7 +66,6 @@ function diasMes()
     for ($dia = 1; $dia <= $dias_mes; $dia++) {
         echo "<div class='dia'><span>$dia</span></div>";
     }
-
 }
 // function mesConFechas($conn, $idTipoObjetivo)
 // {
@@ -72,80 +107,83 @@ function diasMes()
 //             }
 //         }
 //         if ($contieneObjetivo) {
-//         ?>
+//         
+?>
 <!-- //             <a class="calendarioItem especial" href="Formularios/formularioObjetivos.php?<?php echo "id=" . $id; ?>">X</a> -->
 
-         <?php
+<?php
 //         } else {
-//         ?>
+//         
+?>
 <!-- //             <div class="calendarioItem"></div> -->
 
-         <?php
+<?php
 //         }
 
 
-//         ?>
- <?php
+//         
+?>
+<?php
 //     }
 // }
 function mesConFechas($conn, $idTipoObjetivo)
 {
     // Fecha de inicio del mes (primer día)
     $fecha_inicio = date('Y-m-01');
-    
+
     // Fecha de fin del mes (último día)
     $fecha_fin = date('Y-m-t');
-    
+
     // Obtener el ID del usuario de la sesión
     $idUsuario = $_SESSION["idUsuario"];
-    
+
     // Consulta para obtener todos los objetivos del usuario en el mes actual
     $consulta = "SELECT * FROM objetivosUsuarios 
                 WHERE idUsuario = $idUsuario 
                 AND fechaInicio >= '$fecha_inicio' 
                 AND fechaFinal <= '$fecha_fin'
                 AND idTipoObjetivo = $idTipoObjetivo";
-    
+
     // Ejecutar la consulta UNA SOLA VEZ
     $resultado = $conn->query($consulta);
-    
+
     // Crear un array para marcar los días que tienen objetivos
     $diasConObjetivo = array();
     $objetivosPorDia = array();
-    
+
     // Procesar los resultados
     while ($fila = $resultado->fetch_assoc()) {
         $fechaInicio = new DateTime($fila["fechaInicio"]);
         $fechaFinal = new DateTime($fila["fechaFinal"]);
         $idObjetivo = $fila["id"];
-        
+
         // Marcar todos los días entre fechaInicio y fechaFinal
         $intervalo = DateInterval::createFromDateString('1 day');
         $periodo = new DatePeriod($fechaInicio, $intervalo, $fechaFinal->modify('+1 day'));
-        
+
         foreach ($periodo as $fecha) {
             $dia = (int)$fecha->format('d');
             $diasConObjetivo[$dia] = true;
             $objetivosPorDia[$dia] = $idObjetivo;
         }
     }
-    
+
     // Obtener información del mes actual
     $mes = date('n');
     $anio = date('Y');
     $dias_mes = cal_days_in_month(CAL_GREGORIAN, $mes, $anio);
-    
+
     // Recorrer todos los días del mes
     for ($dia = 1; $dia <= $dias_mes; $dia++) {
         if (isset($diasConObjetivo[$dia])) {
             $id = $objetivosPorDia[$dia];
-            ?>
+?>
             <a class="calendarioItem especial" href="Formularios/formularioObjetivos.php?id=<?php echo $id; ?>"></a>
-            <?php
+        <?php
         } else {
-            ?>
+        ?>
             <div class="calendarioItem"></div>
-            <?php
+<?php
         }
     }
 }

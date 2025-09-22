@@ -47,14 +47,14 @@ $usuario = obtenerUsuario($conn);
     <div class="panelPrincipal">
         <h3>RESUMEN PRINCIPAL</h3>
         <div class="estadisticas">
-            <div class="estadistica">
+            <!-- <div class="estadistica">
                 <span>Días Completados:</span>
                 <span id="bbdd">20</span>
             </div>
             <div class="estadistica">
                 <span>Temas Superados:</span>
                 <span id="bbdd">7</span>
-            </div>
+            </div> -->
             <button id="addTipoObjetivo">Añadir Objetivo</button>
             <button id="addObjetivo">Añadir Plazo</button>
 
@@ -63,7 +63,7 @@ $usuario = obtenerUsuario($conn);
         <div class="objetivosMensuales">
             <div class="gridDual">
                 <div class="itemTitulo">Objetivo</div>
-                <div class="calendarioTitulo">Mes</div>
+                <div class="calendarioTitulo">Mes (<?php echo obtenerMesDescripcion()  ?>)</div>
                 <div>&nbsp;</div>
                 <div class="diasMes">
                     <?php diasMes(); ?>

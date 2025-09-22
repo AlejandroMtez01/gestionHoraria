@@ -102,7 +102,7 @@ if (isset($_POST["crear"])) {
     }
 }
  else if (isset($_POST["cancelar"])) {
-    header("Location: ../alertas.php?exito=Alerta cancelada correctamente.");
+        header("Location: /GestionHoraria/indice.php?exito=Alerta creada correctamente.");
 } else if (isset($_POST["eliminar"])) {
     $conn->begin_transaction();
 
