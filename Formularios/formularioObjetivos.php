@@ -162,4 +162,9 @@ if ($edicion) {
     cambioEnFormulario(document.getElementById("form1"));
 
     clickFueraModalConPreguntaModificacion();
+
+    fInicio = document.querySelectorAll("[name='fInicio']")[0];
+    fFinal = document.querySelectorAll("[name='fFinal']")[0];
+    
+    copiarAlSalir(fInicio, fFinal);
 </script>

@@ -17,6 +17,18 @@ div.panelPrincipal {
         margin: 50px 20px;
         justify-content: center;
 
+        button {
+            border-radius: 7.5px;
+            padding: 10px;
+            box-shadow: 2px 3px;
+            background-color: rgb(255, 250, 240);
+
+            &:hover {
+                background-color: azure;
+                cursor: pointer;
+            }
+        }
+
         .estadistica {
             display: block;
             border: 1px solid gray;
@@ -33,8 +45,9 @@ div.panelPrincipal {
     .objetivosMensuales {
         display: flex;
         justify-content: center;
-        border: 1px solid gray;
+        border: 1px solid rgb(209, 209, 209);
         padding: 50px;
+        border-radius: 7.5px;
 
         .gridDual {
             display: grid;
@@ -47,6 +60,18 @@ div.panelPrincipal {
                 letter-spacing: 1px;
                 text-transform: uppercase;
                 text-align: center;
+
+                button {
+                    margin: 5px;
+                    border-radius: 3px;
+                    border: 1px solid rgb(0, 0, 0);
+                    background-color: rgb(255, 250, 240);
+
+                    &:hover {
+                        background-color: azure;
+                        cursor: pointer;
+                    }
+                }
             }
 
 
@@ -87,17 +112,30 @@ div.panelPrincipal {
 
 
                 .calendarioItem {
-                    width: 10px;
+                    width: 40px;
+                    height: 40px;
                     display: flex;
+
                     justify-content: center;
                     align-items: center;
-                    padding: 15px;
-                    border: 1px solid gray;
-                    height: 10px;
+                    // padding: 15px;
+                    border: 1px solid darkred;
+                    border-radius: 3px;
 
+                    a {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+                        height: 100%;
+                        margin: 5px;
 
-                    &.especial {
-                        background-color: rgba(255, 220, 220, 0.829);
+                        &.especial {
+                            width: 100%;
+                            height: 75%;
+                            background-color: rgba(255, 220, 220, 0.829);
+                            border-radius: 7.5px;
+                        }
                     }
                 }
             }

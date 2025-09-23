@@ -45,3 +45,11 @@ function clickFueraModalConPreguntaModificacion() {
         }
     }
 }
+function copiarAlSalir(etiqueta1,etiqueta2){
+        etiqueta1.addEventListener('blur', function() {
+        // Pasar el valor de fInicio a fFinal
+        etiqueta2.value = this.value;
+
+
+    });
+}

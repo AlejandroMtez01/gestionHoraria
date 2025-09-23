@@ -118,65 +118,7 @@ function diasMes($mes = null, $year = null)
         echo "<div class='dia'><span>$dia</span></div>";
     }
 }
-// function mesConFechas($conn, $idTipoObjetivo)
-// {
-//     // Fecha de inicio del mes (primer día)
-//     $fecha_inicio = date('Y-m-01');
 
-//     // Fecha de fin del mes (último día)
-//     $fecha_fin = date('Y-m-t');
-//     $consulta = "SELECT * FROM objetivosUsuarios WHERE idUsuario=" . $_SESSION["idUsuario"] . " and fechaInicio>='$fecha_inicio' and fechaFinal<='$fecha_fin'";
-//     //echo $consulta;
-
-
-//     //Obtener el mes actual
-//     $mes = date('n'); //Mes Actual
-//     $anio = date('Y'); //Año Actual
-
-//     //Días del mes
-//     $dias_mes = cal_days_in_month(CAL_GREGORIAN, $mes, $anio);
-//     //echo "Días en el mes: $dias_mes\n\n";
-//     // Recorrer todos los días
-
-//     for ($dia = 1; $dia <= $dias_mes; $dia++) {
-
-//         $resultado = $conn->query($consulta);
-//         $contieneObjetivo = false;
-//         while ($fila = $resultado->fetch_assoc()) {
-//             //Si en uno de los registros cumple la condición
-//             //echo $fila["fechaInicio"] . "<br>";
-//             //echo $fila["fechaFinal"] . "<br>";
-
-//             $fechaInicio = new DateTime($fila["fechaInicio"]);
-//             $fechaFinal = new DateTime($fila["fechaFinal"]);
-//             $fechaBucle  = (new DateTime())->setDate(date('Y'), $mes, $dia);
-
-
-//             if ($fechaBucle >= $fechaInicio && $fechaBucle <= $fechaFinal && $idTipoObjetivo == $fila["idTipoObjetivo"]) {
-//                 $contieneObjetivo = true;
-//                 $id = $fila["id"];
-//             }
-//         }
-//         if ($contieneObjetivo) {
-//         
-?>
-<!-- //             <a class="calendarioItem especial" href="Formularios/formularioObjetivos.php?<?php echo "id=" . $id; ?>">X</a> -->
-
-<?php
-//         } else {
-//         
-?>
-<!-- //             <div class="calendarioItem"></div> -->
-
-<?php
-//         }
-
-
-//         
-?>
-<?php
-//     }
-// }
 function mesConFechas($conn, $idTipoObjetivo, $mes = null, $year = null)
 {
     if ($mes == null) {
@@ -234,7 +176,7 @@ function mesConFechas($conn, $idTipoObjetivo, $mes = null, $year = null)
         if (isset($diasConObjetivo[$dia])) {
             $id = $objetivosPorDia[$dia];
 ?>
-            <a class="calendarioItem especial" href="Formularios/formularioObjetivos.php?id=<?php echo $id; ?>"></a>
+            <div class="calendarioItem"><a class="especial" href="Formularios/formularioObjetivos.php?id=<?php echo $id; ?>"></a></div> 
         <?php
         } else {
         ?>
