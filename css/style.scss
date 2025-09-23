@@ -49,11 +49,14 @@ div.panelPrincipal {
                 text-align: center;
             }
 
+
+
             .diasMes {
                 display: flex;
                 gap: 3px;
 
-                .dia {
+                .dia,
+                .diaSem {
                     padding: 15px;
                     border: 1px solid gray;
                     width: 10px;
@@ -63,8 +66,12 @@ div.panelPrincipal {
                     justify-content: center;
                     align-items: center;
 
-
+                    &.festivo {
+                        background-color: #eeeeee;
+                    }
                 }
+
+
             }
 
             .item {

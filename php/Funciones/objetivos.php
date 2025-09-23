@@ -20,7 +20,8 @@ function obtenerMesActual()
     }
 }
 
-function obtenerMesDescripcionSegunParametro($numero_mes) {
+function obtenerMesDescripcionSegunParametro($numero_mes)
+{
     $meses = [
         1 => 'Enero',
         2 => 'Febrero',
@@ -35,10 +36,11 @@ function obtenerMesDescripcionSegunParametro($numero_mes) {
         11 => 'Noviembre',
         12 => 'Diciembre'
     ];
-    
+
     return $meses[$numero_mes] ?? 'Mes inválido';
 }
-function obtenerMesDescripcion() {
+function obtenerMesDescripcion($m = null)
+{
     $meses = [
         1 => 'Enero',
         2 => 'Febrero',
@@ -53,13 +55,62 @@ function obtenerMesDescripcion() {
         11 => 'Noviembre',
         12 => 'Diciembre'
     ];
-    
-    return $meses[date('n')] ?? 'Mes inválido';
+
+    if ($m == null) {
+        return $meses[date('n')] ?? 'Mes inválido';
+    } else {
+        return $meses[$m] ?? 'Mes inválido';
+    }
 }
-function diasMes()
+function obtenerYear($y = null)
 {
 
-    $dias_mes = cal_days_in_month(CAL_GREGORIAN, date('n'), date('Y'));
+    if ($y == null) {
+        return date('Y');
+    } else {
+        return $y;
+    }
+}
+function diasSemana($mes = null, $year = null)
+{
+    if ($mes == null) {
+        $mes = date('n');
+    }
+    if ($year == null) {
+        $year = date('Y');
+    }
+    $dias_mes = cal_days_in_month(CAL_GREGORIAN, $mes, $year);
+    $inicialesDiasSem = [
+        1 => 'L',
+        2 => 'M',
+        3 => 'X',
+        4 => 'J',
+        5 => 'V',
+        6 => 'S',
+        7 => 'D',
+    ];
+
+
+    for ($dia = 1; $dia <= $dias_mes; $dia++) {
+        $fechaBucle = new DateTime($year . "-" . $mes . "-" . $dia);
+        $diaSem = $fechaBucle->format('N');
+        if ($diaSem > 5) {
+            echo "<div class='diaSem festivo'><span>" . $inicialesDiasSem[$diaSem] . "</span></div>";
+        } else {
+            echo "<div class='diaSem'><span>" . $inicialesDiasSem[$diaSem] . "</span></div>";
+        }
+    }
+}
+function diasMes($mes = null, $year = null)
+{
+
+    if ($mes == null) {
+        $mes = date('n');
+    }
+    if ($year == null) {
+        $year = date('Y');
+    }
+    $dias_mes = cal_days_in_month(CAL_GREGORIAN, $mes, $year);
     //echo "Días en el mes: $dias_mes\n\n";
     // Recorrer todos los días
 
@@ -126,13 +177,19 @@ function diasMes()
 <?php
 //     }
 // }
-function mesConFechas($conn, $idTipoObjetivo)
+function mesConFechas($conn, $idTipoObjetivo, $mes = null, $year = null)
 {
+    if ($mes == null) {
+        $mes = date('n');
+    }
+    if ($year == null) {
+        $year = date('Y');
+    }
     // Fecha de inicio del mes (primer día)
-    $fecha_inicio = date('Y-m-01');
+    $fecha_inicio = date("$year-$mes-01");
 
     // Fecha de fin del mes (último día)
-    $fecha_fin = date('Y-m-t');
+    $fecha_fin = date("$year-$mes-t");
 
     // Obtener el ID del usuario de la sesión
     $idUsuario = $_SESSION["idUsuario"];
@@ -169,9 +226,8 @@ function mesConFechas($conn, $idTipoObjetivo)
     }
 
     // Obtener información del mes actual
-    $mes = date('n');
-    $anio = date('Y');
-    $dias_mes = cal_days_in_month(CAL_GREGORIAN, $mes, $anio);
+
+    $dias_mes = cal_days_in_month(CAL_GREGORIAN, $mes, $year);
 
     // Recorrer todos los días del mes
     for ($dia = 1; $dia <= $dias_mes; $dia++) {

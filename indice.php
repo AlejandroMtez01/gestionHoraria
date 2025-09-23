@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/GestionHoraria/css/style.css">
     <link rel="stylesheet" href="/GestionHoraria/css/modal.css">
     <script src="/GestionHoraria/js/eventosFormularios.js"></script>
+    <script src="/GestionHoraria/js/UtilsParametrosCabecera.js"></script>
+    <script src="/GestionHoraria/js/UtilsFechas.js"></script>
 
 </head>
 
@@ -63,10 +65,15 @@ $usuario = obtenerUsuario($conn);
         <div class="objetivosMensuales">
             <div class="gridDual">
                 <div class="itemTitulo">Objetivo</div>
-                <div class="calendarioTitulo">Mes (<?php echo obtenerMesDescripcion()  ?>)</div>
+                <div class="calendarioTitulo"><button id="AnteriorMes">←</button> Mes (<?php echo obtenerMesDescripcion($_GET["m"]) . " " . obtenerYear($_GET["y"])  ?>) <button id="SiguienteMes">→</button></div>
                 <div>&nbsp;</div>
                 <div class="diasMes">
-                    <?php diasMes(); ?>
+                    <?php diasMes($_GET["m"], $_GET["y"]); ?>
+
+                </div>
+                <div>&nbsp;</div>
+                <div class="diasMes">
+                    <?php diasSemana($_GET["m"], $_GET["y"]); ?>
                 </div>
                 <?php
                 //Obtenemos los items por sesión de usuario
@@ -77,10 +84,10 @@ $usuario = obtenerUsuario($conn);
                 ?>
                     <div class="item">
                         <a href="Formularios/formularioTipoObjetivos.php?id=<?php echo $fila["id"]; ?>"><?php echo $fila["descripcion"]; ?></a>
-                        
+
                     </div>
                     <div class="calendario">
-                        <?php mesConFechas($conn,$fila["id"]); ?>
+                        <?php mesConFechas($conn, $fila["id"],$_GET["m"], $_GET["y"]); ?>
                     </div>
                 <?php
                 }
@@ -100,10 +107,73 @@ $usuario = obtenerUsuario($conn);
         window.open("Formularios/formularioTipoObjetivos.php");
     }
 
-        var botonObjetivo = document.getElementById("addObjetivo");
+    var botonObjetivo = document.getElementById("addObjetivo");
 
     botonObjetivo.onclick = function(event) {
         window.open("Formularios/formularioObjetivos.php");
+    }
+
+    //BOTONES
+    botonSiguienteMes = document.getElementById("SiguienteMes");
+    botonAnteriorMes = document.getElementById("AnteriorMes");
+
+    botonSiguienteMes.onclick = function() {
+        console.log("Prueba Siguiente MES");
+        if (UtilsParametrosCabecera.obtenerParametro("m") == null && UtilsParametrosCabecera.obtenerParametro("y") == null) { //Si no tiene mes
+            console.log("Entro sin mes ni año!");
+            mes = UtilsFechas.obtenerMesActual();
+            year = UtilsFechas.obtenerYearActual();
+
+        } else {
+            mes = Number.parseInt(UtilsParametrosCabecera.obtenerParametro("m"));
+            year = Number.parseInt(UtilsParametrosCabecera.obtenerParametro("y"));
+        }
+
+        console.log(mes);
+        console.log(year);
+
+        if (mes == 12) {
+            mes = 1;
+            year++;
+        } else {
+            mes++;
+        }
+        UtilsParametrosCabecera.establecerParametrosyRedirigir({
+            "m": mes,
+            "y": year
+        });
+
+
+    }
+    botonAnteriorMes.onclick = function() {
+        console.log("Prueba Anterior MES");
+        if (UtilsParametrosCabecera.obtenerParametro("m") == null && UtilsParametrosCabecera.obtenerParametro("y") == null) { //Si no tiene mes
+            console.log("Entro sin mes ni año!");
+            mes = UtilsFechas.obtenerMesActual();
+            year = UtilsFechas.obtenerYearActual();
+
+        } else {
+            mes = Number.parseInt(UtilsParametrosCabecera.obtenerParametro("m"));
+            year = Number.parseInt(UtilsParametrosCabecera.obtenerParametro("y"));
+        }
+
+        console.log(mes);
+        console.log(year);
+
+        if (mes == 1) {
+            mes = 12;
+            year--;
+        } else {
+            mes--;
+        }
+        /*establecerParametro("m", mes);
+        establecerParametro("y", year);
+        recargarPagina();*/
+        UtilsParametrosCabecera.establecerParametrosyRedirigir({
+            "m": mes,
+            "y": year
+        });
+
     }
 </script>
 
