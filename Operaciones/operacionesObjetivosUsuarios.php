@@ -116,7 +116,7 @@ if (isset($_POST["crear"])) {
     $stmt->execute();
 
     $conn->commit();
-    header("Location: /GestionHoraria/indice.php?exito=Alerta creada correctamente.");
+    header("Location: /GestionHoraria/indice.php");
 } else {
     echo "La acción contemplada no es correcta.";
 }

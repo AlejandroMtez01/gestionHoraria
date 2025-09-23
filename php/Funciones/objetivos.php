@@ -131,7 +131,9 @@ function mesConFechas($conn, $idTipoObjetivo, $mes = null, $year = null)
     $fecha_inicio = date("$year-$mes-01");
 
     // Fecha de fin del mes (último día)
-    $fecha_fin = date("$year-$mes-t");
+    $fecha_fin = date("Y-m-t", strtotime("$year-$mes-01"));
+
+
 
     // Obtener el ID del usuario de la sesión
     $idUsuario = $_SESSION["idUsuario"];
@@ -142,6 +144,7 @@ function mesConFechas($conn, $idTipoObjetivo, $mes = null, $year = null)
                 AND fechaInicio >= '$fecha_inicio' 
                 AND fechaFinal <= '$fecha_fin'
                 AND idTipoObjetivo = $idTipoObjetivo";
+
 
     // Ejecutar la consulta UNA SOLA VEZ
     $resultado = $conn->query($consulta);

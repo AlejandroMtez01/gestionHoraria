@@ -72,6 +72,7 @@ $usuario = obtenerUsuario($conn);
 
                 </div>
                 <div>&nbsp;</div>
+                
                 <div class="diasMes">
                     <?php diasSemana($_GET["m"], $_GET["y"]); ?>
                 </div>
@@ -87,7 +88,7 @@ $usuario = obtenerUsuario($conn);
 
                     </div>
                     <div class="calendario">
-                        <?php mesConFechas($conn, $fila["id"],$_GET["m"], $_GET["y"]); ?>
+                        <?php mesConFechas($conn, $fila["id"], $_GET["m"], $_GET["y"]); ?>
                     </div>
                 <?php
                 }
@@ -117,64 +118,9 @@ $usuario = obtenerUsuario($conn);
     botonSiguienteMes = document.getElementById("SiguienteMes");
     botonAnteriorMes = document.getElementById("AnteriorMes");
 
-    botonSiguienteMes.onclick = function() {
-        console.log("Prueba Siguiente MES");
-        if (UtilsParametrosCabecera.obtenerParametro("m") == null && UtilsParametrosCabecera.obtenerParametro("y") == null) { //Si no tiene mes
-            console.log("Entro sin mes ni año!");
-            mes = UtilsFechas.obtenerMesActual();
-            year = UtilsFechas.obtenerYearActual();
+    botonSiguienteMes.onclick = siguienteMes;
 
-        } else {
-            mes = Number.parseInt(UtilsParametrosCabecera.obtenerParametro("m"));
-            year = Number.parseInt(UtilsParametrosCabecera.obtenerParametro("y"));
-        }
-
-        console.log(mes);
-        console.log(year);
-
-        if (mes == 12) {
-            mes = 1;
-            year++;
-        } else {
-            mes++;
-        }
-        UtilsParametrosCabecera.establecerParametrosyRedirigir({
-            "m": mes,
-            "y": year
-        });
-
-
-    }
-    botonAnteriorMes.onclick = function() {
-        console.log("Prueba Anterior MES");
-        if (UtilsParametrosCabecera.obtenerParametro("m") == null && UtilsParametrosCabecera.obtenerParametro("y") == null) { //Si no tiene mes
-            console.log("Entro sin mes ni año!");
-            mes = UtilsFechas.obtenerMesActual();
-            year = UtilsFechas.obtenerYearActual();
-
-        } else {
-            mes = Number.parseInt(UtilsParametrosCabecera.obtenerParametro("m"));
-            year = Number.parseInt(UtilsParametrosCabecera.obtenerParametro("y"));
-        }
-
-        console.log(mes);
-        console.log(year);
-
-        if (mes == 1) {
-            mes = 12;
-            year--;
-        } else {
-            mes--;
-        }
-        /*establecerParametro("m", mes);
-        establecerParametro("y", year);
-        recargarPagina();*/
-        UtilsParametrosCabecera.establecerParametrosyRedirigir({
-            "m": mes,
-            "y": year
-        });
-
-    }
+    botonAnteriorMes.onclick = anteriorMes;
 </script>
 
 </html>

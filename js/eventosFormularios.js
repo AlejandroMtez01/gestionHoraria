@@ -45,11 +45,70 @@ function clickFueraModalConPreguntaModificacion() {
         }
     }
 }
-function copiarAlSalir(etiqueta1,etiqueta2){
-        etiqueta1.addEventListener('blur', function() {
+function copiarAlSalir(etiqueta1, etiqueta2) {
+    etiqueta1.addEventListener('blur', function () {
         // Pasar el valor de fInicio a fFinal
         etiqueta2.value = this.value;
 
 
     });
+}
+function siguienteMes() {
+    console.log("Prueba Siguiente MES");
+    if (UtilsParametrosCabecera.obtenerParametro("m") == null && UtilsParametrosCabecera.obtenerParametro("y") == null) { //Si no tiene mes
+        console.log("Entro sin mes ni año!");
+        mes = UtilsFechas.obtenerMesActual();
+        year = UtilsFechas.obtenerYearActual();
+
+    } else {
+        mes = Number.parseInt(UtilsParametrosCabecera.obtenerParametro("m"));
+        year = Number.parseInt(UtilsParametrosCabecera.obtenerParametro("y"));
+    }
+
+    console.log(mes);
+    console.log(year);
+
+    if (mes == 12) {
+        mes = 1;
+        year++;
+    } else {
+        mes++;
+    }
+    console.log("m " + mes + " y " + year);
+    UtilsParametrosCabecera.establecerParametrosyRedirigir({
+        "m": mes,
+        "y": year
+    });
+
+
+}
+function anteriorMes() {
+    console.log("Prueba Anterior MES");
+    if (UtilsParametrosCabecera.obtenerParametro("m") == null && UtilsParametrosCabecera.obtenerParametro("y") == null) { //Si no tiene mes
+        console.log("Entro sin mes ni año!");
+        mes = UtilsFechas.obtenerMesActual();
+        year = UtilsFechas.obtenerYearActual();
+
+    } else {
+        mes = Number.parseInt(UtilsParametrosCabecera.obtenerParametro("m"));
+        year = Number.parseInt(UtilsParametrosCabecera.obtenerParametro("y"));
+    }
+
+    console.log(mes);
+    console.log(year);
+
+    if (mes == 1) {
+        mes = 12;
+        year--;
+    } else {
+        mes--;
+    }
+    /*establecerParametro("m", mes);
+    establecerParametro("y", year);
+    recargarPagina();*/
+    UtilsParametrosCabecera.establecerParametrosyRedirigir({
+        "m": mes,
+        "y": year
+    });
+
 }

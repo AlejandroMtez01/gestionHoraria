@@ -68,7 +68,8 @@ if (isset($_POST["crear"])) {
         exit();
     }
 } else if (isset($_POST["cancelar"])) {
-    header("Location: ../alertas.php?exito=Alerta cancelada correctamente.");
+    header("Location: /GestionHoraria/indice.php");
+
 } else {
     echo "La acción contemplada no es correcta.";
 }
