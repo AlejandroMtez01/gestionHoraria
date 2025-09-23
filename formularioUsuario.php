@@ -94,7 +94,7 @@ if (isset($_POST["Login"])) {
             header("Location: login.php?error=La contraseña introducida no es correcta.");
         }
     } else { //El email introducido no existe
-        //header("Location: login.php?error=El email introducido no existe ".$_POST["email"]);
+        header("Location: login.php?error=El email introducido no existe ".$_POST["email"]);
 
     }
 
@@ -143,7 +143,6 @@ if (isset($_POST["Login"])) {
         $stmt->close();
         
         $_SESSION["id"] = $id;
-        echo "El id obtenido es " . $_SESSION["id"] . "<br>";
 
         /*echo $sqlSelect."<br>";
         echo $_POST['email']."<br>";
@@ -160,7 +159,7 @@ if (isset($_POST["Login"])) {
         $stmt->close();
         //------------------
 
-        //header("Location: confirm-register.php");
+        header("Location: /GestionHoraria/indice.php");
     } catch (Exception $e) {
         echo $e;
     }
