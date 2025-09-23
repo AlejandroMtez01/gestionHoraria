@@ -135,6 +135,13 @@ div.panelPrincipal {
                             height: 75%;
                             background-color: rgba(255, 220, 220, 0.829);
                             border-radius: 7.5px;
+                            border: 1px solid rgb(63, 0, 0);
+
+                            &:hover {
+                                border: 1px solid darkred;
+                                background-color: rgba(255, 204, 204, 0.829);
+
+                            }
                         }
                     }
                 }
