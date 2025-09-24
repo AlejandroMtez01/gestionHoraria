@@ -16,7 +16,7 @@ function obtenerMesActual()
     for ($dia = 1; $dia <= $dias_mes; $dia++) {
 ?>
         <div class="calendarioItem"></div>
-<?php
+        <?php
     }
 }
 
@@ -140,10 +140,11 @@ function mesConFechas($conn, $idTipoObjetivo, $mes = null, $year = null)
 
     // Consulta para obtener todos los objetivos del usuario en el mes actual
     $consulta = "SELECT * FROM objetivosUsuarios 
-                WHERE idUsuario = $idUsuario 
-                AND fechaInicio >= '$fecha_inicio' 
-                AND fechaFinal <= '$fecha_fin'
-                AND idTipoObjetivo = $idTipoObjetivo";
+                WHERE idUsuario = $idUsuario
+                AND idTipoObjetivo = $idTipoObjetivo
+                AND fechaInicio <= '$fecha_fin' 
+                AND fechaFinal >= '$fecha_inicio'";
+
 
 
     // Ejecutar la consulta UNA SOLA VEZ
@@ -154,14 +155,38 @@ function mesConFechas($conn, $idTipoObjetivo, $mes = null, $year = null)
     $objetivosPorDia = array();
 
     // Procesar los resultados
+    // while ($fila = $resultado->fetch_assoc()) {
+    //     $fechaInicio = new DateTime($fila["fechaInicio"]);
+    //     $fechaFinal = new DateTime($fila["fechaFinal"]);
+    //     $idObjetivo = $fila["id"];
+
+    //     // Marcar todos los días entre fechaInicio y fechaFinal
+    //     $intervalo = DateInterval::createFromDateString('1 day');
+    //     $periodo = new DatePeriod($fechaInicio, $intervalo, $fechaFinal->modify('+1 day'));
+
+    //     foreach ($periodo as $fecha) {
+    //         $dia = (int)$fecha->format('d');
+    //         $diasConObjetivo[$dia] = true;
+    //         $objetivosPorDia[$dia] = $idObjetivo;
+    //     }
+    // }
+
     while ($fila = $resultado->fetch_assoc()) {
         $fechaInicio = new DateTime($fila["fechaInicio"]);
         $fechaFinal = new DateTime($fila["fechaFinal"]);
         $idObjetivo = $fila["id"];
 
-        // Marcar todos los días entre fechaInicio y fechaFinal
+        // Determinar qué parte del objetivo cae dentro del mes actual
+        $inicioMes = new DateTime($fecha_inicio);
+        $finMes = new DateTime($fecha_fin);
+
+        // El rango a mostrar es la intersección entre el objetivo y el mes
+        $inicioMostrar = ($fechaInicio > $inicioMes) ? $fechaInicio : $inicioMes;
+        $finMostrar = ($fechaFinal < $finMes) ? $fechaFinal : $finMes;
+
+        // Marcar todos los días del rango que cae dentro del mes
         $intervalo = DateInterval::createFromDateString('1 day');
-        $periodo = new DatePeriod($fechaInicio, $intervalo, $fechaFinal->modify('+1 day'));
+        $periodo = new DatePeriod($inicioMostrar, $intervalo, $finMostrar->modify('+1 day'));
 
         foreach ($periodo as $fecha) {
             $dia = (int)$fecha->format('d');
@@ -178,8 +203,8 @@ function mesConFechas($conn, $idTipoObjetivo, $mes = null, $year = null)
     for ($dia = 1; $dia <= $dias_mes; $dia++) {
         if (isset($diasConObjetivo[$dia])) {
             $id = $objetivosPorDia[$dia];
-?>
-            <div class="calendarioItem"><a class="especial" href="Formularios/formularioObjetivos.php?id=<?php echo $id; ?>"></a></div> 
+        ?>
+            <div class="calendarioItem"><a class="especial" href="Formularios/formularioObjetivos.php?id=<?php echo $id; ?>"></a></div>
         <?php
         } else {
         ?>
