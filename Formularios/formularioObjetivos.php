@@ -24,6 +24,12 @@ if ($edicion) {
     $consulta = "SELECT * FROM objetivosUsuarios WHERE id=" . $_GET["id"];
     $resultado = $conn->query($consulta);
     $filaGeneral = $resultado->fetch_assoc();
+} else if (isset($_GET["tipoObjetivo"]) &&  isset($_GET["descripcion"]) &&  isset($_GET["observaciones"]) &&  isset($_GET["fInicio"]) && isset($_GET["fFinal"])) {
+    $filaGeneral["tipoObjetivo"] = $_GET["tipoObjetivo"];
+    $filaGeneral["descripcion"] = $_GET["descripcion"];
+    $filaGeneral["observaciones"] = $_GET["observaciones"];
+    $filaGeneral["fechaInicio"] = $_GET["fInicio"];
+    $filaGeneral["fechaFinal"] = $_GET["fFinal"];
 }
 
 
@@ -118,7 +124,9 @@ if ($edicion) {
 
 
                     <div class="panelInformacion">
-                        <span class="error"></span>
+                        <span class="error"><?php if (isset($_GET["error"])) {
+                                                echo $_GET["error"];
+                                            } ?></span>
 
 
                     </div>
@@ -165,6 +173,6 @@ if ($edicion) {
 
     fInicio = document.querySelectorAll("[name='fInicio']")[0];
     fFinal = document.querySelectorAll("[name='fFinal']")[0];
-    
+
     copiarAlSalir(fInicio, fFinal);
 </script>
