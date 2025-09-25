@@ -7,23 +7,12 @@ if (session_status() != PHP_SESSION_ACTIVE) {
 
 
 //Función para comprobar si el rango ya ha sido elegido
-function c1omprobarExisteRangoFecha($conn, $fechaInicio, $fechaFinal, $id = null)
-{
-    if ($id == null) {
-        //Se trata de una creación
-        $consulta = "SELECT * FROM objetivosUsuarios WHERE id=" . $_GET["id"];
-        $resultado = $conn->query($consulta);
-        $filaGeneral = $resultado->fetch_assoc();
-        return false;
-    } else {
-        return false;
-        //Se trata de una edición
-    }
-}
+
 
 function comprobarExisteRangoFecha($conn, $fechaInicio, $fechaFinal, $idUsuario, $idTipoObjetivo = null, $excluirId = null)
 {
     if ($excluirId == null) {
+
         $query = "SELECT id FROM objetivosUsuarios 
                   WHERE idUsuario = ? 
                   AND idTipoObjetivo = ?
@@ -39,11 +28,12 @@ function comprobarExisteRangoFecha($conn, $fechaInicio, $fechaFinal, $idUsuario,
                   AND fechaFinal >= ?
                   AND id <> ?";
         $stmt = $conn->prepare($query);
-        $stmt->bind_param("iiss", $idUsuario, $idTipoObjetivo, $fechaFinal, $fechaInicio, $excluirId);
+        $stmt->bind_param("iissi", $idUsuario, $idTipoObjetivo, $fechaFinal, $fechaInicio, $excluirId);
     }
 
     $stmt->execute();
     $result = $stmt->get_result();
+
 
     return $result->num_rows > 0;
 }
@@ -54,7 +44,7 @@ if (isset($_POST["crear"])) {
     //Especificamos de que tipo de alerta se trata.
     try {
         //-- Comprueba si pasan las validaciones
-        if (comprobarExisteRangoFecha($conn, $_POST["fInicio"], $_POST["fFinal"], $_SESSION["idUsuario"], $_POST["tipoObjetivo"]) == false) { //Si no cumple la VALIDACIÓN.
+        if (comprobarExisteRangoFecha($conn, $_POST["fInicio"], $_POST["fFinal"], $_SESSION["idUsuario"], $_POST["tipoObjetivo"]) == true) { //Si no cumple la VALIDACIÓN.
             header(
                 "Location:  /GestionHoraria/Formularios/formularioObjetivos.php?"
                     . "&error=<b>ERROR!</b> La fecha que intentas utilizar ya es utilizada completa o parcialmente para algun plazo del objetivo seleccionado."
@@ -66,8 +56,7 @@ if (isset($_POST["crear"])) {
             );
         } else {
             //--
-            $conn->begin_transaction();
-
+            echo "Entro aquí";
 
             $query = "INSERT INTO objetivosUsuarios (idTipoObjetivo,descripcion, observaciones, fechaInicio, fechaFinal, idUsuario) VALUES (?,?,?,?,?,?)";
             $stmt = $conn->prepare($query);
@@ -83,6 +72,7 @@ if (isset($_POST["crear"])) {
 
             $stmt->execute();
             $id = $stmt->insert_id;
+            echo $id;
 
 
             $conn->commit();
@@ -97,28 +87,35 @@ if (isset($_POST["crear"])) {
 } else if (isset($_POST["editar"])) {
     try {
 
+        if (comprobarExisteRangoFecha($conn, $_POST["fInicio"], $_POST["fFinal"], $_SESSION["idUsuario"], $_POST["tipoObjetivo"], $_POST["id"]) == true) { //Si no cumple la VALIDACIÓN.
+            header(
+                "Location:  /GestionHoraria/Formularios/formularioObjetivos.php?"
+                    . "&error=<b>ERROR!</b> La fecha que intentas utilizar ya es utilizada completa o parcialmente para algun plazo del objetivo seleccionado."
+                    . "&id=" . $_POST["id"]
+            );
+        } else {
+            $conn->begin_transaction();
 
-        $conn->begin_transaction();
+            //En primer lugar se realizan las modificaciones en la tabla alertas
+            $query = "UPDATE objetivosUsuarios SET descripcion=?, observaciones=?, fechaInicio=?, fechaFinal=?, idTipoObjetivo=? WHERE id=?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param(
+                "ssssss",
+                $_POST["descripcion"],
+                $_POST["observaciones"],
+                $_POST["fInicio"],
+                $_POST["fFinal"],
+                $_POST["tipoObjetivo"],
+                $_POST["id"] //Valor oculto del formulario
+            );
+            $stmt->execute();
 
-        //En primer lugar se realizan las modificaciones en la tabla alertas
-        $query = "UPDATE objetivosUsuarios SET descripcion=?, observaciones=?, fechaInicio=?, fechaFinal=?, idTipoObjetivo=? WHERE id=?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param(
-            "ssssss",
-            $_POST["descripcion"],
-            $_POST["observaciones"],
-            $_POST["fInicio"],
-            $_POST["fFinal"],
-            $_POST["tipoObjetivo"],
-            $_POST["id"] //Valor oculto del formulario
-        );
-        $stmt->execute();
-
-        $conn->commit();
+            $conn->commit();
 
 
 
-        header("Location: /GestionHoraria/Formularios/formularioObjetivos.php?id=" . $_POST["id"]);
+            header("Location: /GestionHoraria/Formularios/formularioObjetivos.php?id=" . $_POST["id"]);
+        }
     } catch (Exception $e) {
         echo "Error al insertar el registro: " . $e->getMessage() . "<br> Consulta: " . $query;
         $conn->rollback();
@@ -128,28 +125,35 @@ if (isset($_POST["crear"])) {
 } else if (isset($_POST["editar1"])) {
     try {
 
+        if (comprobarExisteRangoFecha($conn, $_POST["fInicio"], $_POST["fFinal"], $_SESSION["idUsuario"], $_POST["tipoObjetivo"], $_POST["id"]) == true) { //Si no cumple la VALIDACIÓN.
+            header(
+                "Location:  /GestionHoraria/Formularios/formularioObjetivos.php?"
+                    . "&error=<b>ERROR!</b> La fecha que intentas utilizar ya es utilizada completa o parcialmente para algun plazo del objetivo seleccionado."
+                    . "&id=" . $_POST["id"]
+            );
+        } else {
+            $conn->begin_transaction();
 
-        $conn->begin_transaction();
+            //En primer lugar se realizan las modificaciones en la tabla alertas
+            $query = "UPDATE objetivosUsuarios SET descripcion=?, observaciones=?, fechaInicio=?, fechaFinal=?, idTipoObjetivo=? WHERE id=?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param(
+                "ssssss",
+                $_POST["descripcion"],
+                $_POST["observaciones"],
+                $_POST["fInicio"],
+                $_POST["fFinal"],
+                $_POST["tipoObjetivo"],
+                $_POST["id"] //Valor oculto del formulario
+            );
+            $stmt->execute();
 
-        //En primer lugar se realizan las modificaciones en la tabla alertas
-        $query = "UPDATE objetivosUsuarios SET descripcion=?, observaciones=?, fechaInicio=?, fechaFinal=?, idTipoObjetivo=? WHERE id=?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param(
-            "ssssss",
-            $_POST["descripcion"],
-            $_POST["observaciones"],
-            $_POST["fInicio"],
-            $_POST["fFinal"],
-            $_POST["tipoObjetivo"],
-            $_POST["id"] //Valor oculto del formulario
-        );
-        $stmt->execute();
-
-        $conn->commit();
+            $conn->commit();
 
 
 
-        header("Location: /GestionHoraria/indice.php?exito=Alerta creada correctamente.");
+            header("Location: /GestionHoraria/indice.php?exito=Alerta creada correctamente.");
+        }
     } catch (Exception $e) {
         echo "Error al insertar el registro: " . $e->getMessage() . "<br> Consulta: " . $query;
         $conn->rollback();
