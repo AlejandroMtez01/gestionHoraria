@@ -86,6 +86,12 @@ div.panelPrincipal .objetivosMensuales .gridDual .diasMes .dia.festivo,
 div.panelPrincipal .objetivosMensuales .gridDual .diasMes .diaSem.festivo {
   background-color: #eeeeee;
 }
+div.panelPrincipal .objetivosMensuales .gridDual .diasMes .dia.diaHoy,
+div.panelPrincipal .objetivosMensuales .gridDual .diasMes .diaSem.diaHoy {
+  border: 1px solid red;
+  font-weight: 600;
+  background-color: rgb(255, 232, 204);
+}
 div.panelPrincipal .objetivosMensuales .gridDual .item {
   display: flex;
   align-items: center;
@@ -102,6 +108,10 @@ div.panelPrincipal .objetivosMensuales .gridDual .calendario .calendarioItem {
   align-items: center;
   border: 1px solid darkred;
   border-radius: 3px;
+}
+div.panelPrincipal .objetivosMensuales .gridDual .calendario .calendarioItem.diaHoy {
+  background-color: rgb(219, 237, 253);
+  border: 1px solid red;
 }
 div.panelPrincipal .objetivosMensuales .gridDual .calendario .calendarioItem a {
   display: flex;

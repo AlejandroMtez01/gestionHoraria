@@ -92,12 +92,20 @@ function diasSemana($mes = null, $year = null)
 
 
     for ($dia = 1; $dia <= $dias_mes; $dia++) {
+
+        //Detecta si se trata del día de hoy
+        if ($dia == date("d") && $mes == date("m")) {
+            $diaHoy = "diaHoy";
+        } else {
+            $diaHoy = "";
+        }
+
         $fechaBucle = new DateTime($year . "-" . $mes . "-" . $dia);
         $diaSem = $fechaBucle->format('N');
         if ($diaSem > 5) {
-            echo "<div class='diaSem festivo'><span>" . $inicialesDiasSem[$diaSem] . "</span></div>";
+            echo "<div class='diaSem festivo $diaHoy'><span>" . $inicialesDiasSem[$diaSem] . "</span></div>";
         } else {
-            echo "<div class='diaSem'><span>" . $inicialesDiasSem[$diaSem] . "</span></div>";
+            echo "<div class='diaSem $diaHoy'><span>" . $inicialesDiasSem[$diaSem] . "</span></div>";
         }
     }
 }
@@ -115,7 +123,13 @@ function diasMes($mes = null, $year = null)
     // Recorrer todos los días
 
     for ($dia = 1; $dia <= $dias_mes; $dia++) {
-        echo "<div class='dia'><span>$dia</span></div>";
+        //Detecta si se trata del día de hoy
+        if ($dia == date("d") && $mes == date("m")) {
+            $diaHoy = "diaHoy";
+        } else {
+            $diaHoy = "";
+        }
+        echo "<div class='dia $diaHoy'><span>$dia</span></div>";
     }
 }
 
@@ -201,14 +215,23 @@ function mesConFechas($conn, $idTipoObjetivo, $mes = null, $year = null)
 
     // Recorrer todos los días del mes
     for ($dia = 1; $dia <= $dias_mes; $dia++) {
+
+
+        //Detecta si se trata del día de hoy
+        if ($dia == date("d") && $mes == date("m")) {
+            $diaHoy = "diaHoy";
+        } else {
+            $diaHoy = "";
+        }
+
         if (isset($diasConObjetivo[$dia])) {
             $id = $objetivosPorDia[$dia];
         ?>
-            <div class="calendarioItem"><a class="especial" href="Formularios/formularioDiarioObjetivos.php?id=<?php echo $id; ?>"></a></div>
+            <div class="calendarioItem <?php echo $diaHoy; ?>"><a class="especial" href="Formularios/formularioDiarioObjetivos.php?id=<?php echo $id; ?>"></a></div>
         <?php
         } else {
         ?>
-            <div class="calendarioItem"></div>
+            <div class="calendarioItem <?php echo $diaHoy; ?>"></div>
 <?php
         }
     }

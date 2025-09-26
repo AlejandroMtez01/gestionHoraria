@@ -92,6 +92,11 @@ div.panelPrincipal {
                     &.festivo {
                         background-color: #eeeeee;
                     }
+                    &.diaHoy{
+                       border: 1px solid red;
+                       font-weight: 600;
+                       background-color: rgb(255, 232, 204);
+                    }
                 }
             }
 
@@ -114,6 +119,11 @@ div.panelPrincipal {
                     // padding: 15px;
                     border: 1px solid darkred;
                     border-radius: 3px;
+
+                    &.diaHoy{
+                        background-color: rgb(219, 237, 253);
+                        border: 1px solid red;
+                    }
 
                     a {
                         display: flex;
