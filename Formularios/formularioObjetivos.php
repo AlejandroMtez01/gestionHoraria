@@ -21,7 +21,7 @@ include "/GestionHoraria/Utils/Consultas";
 $edicion = isset($_GET["id"]);
 
 if ($edicion) {
-    $consulta = "SELECT * FROM objetivosUsuarios WHERE id=" . $_GET["id"];
+    $consulta = "SELECT * FROM diarioObjetivos WHERE id=" . $_GET["id"];
     $resultado = $conn->query($consulta);
     $filaGeneral = $resultado->fetch_assoc();
 } else if (isset($_GET["tipoObjetivo"]) &&  isset($_GET["descripcion"]) &&  isset($_GET["observaciones"]) &&  isset($_GET["fInicio"]) && isset($_GET["fFinal"])) {

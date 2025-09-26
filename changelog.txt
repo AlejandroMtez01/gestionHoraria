@@ -1,0 +1,2 @@
+- 26/09/2025 19:58 - Renombre de tabla en base de datos:
+Se renombra de objetivosUsuarios a diarioObjetivos.

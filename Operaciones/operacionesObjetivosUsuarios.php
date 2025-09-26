@@ -13,7 +13,7 @@ function comprobarExisteRangoFecha($conn, $fechaInicio, $fechaFinal, $idUsuario,
 {
     if ($excluirId == null) {
 
-        $query = "SELECT id FROM objetivosUsuarios 
+        $query = "SELECT id FROM diarioObjetivos 
                   WHERE idUsuario = ? 
                   AND idTipoObjetivo = ?
                   AND fechaInicio <= ? 
@@ -21,7 +21,7 @@ function comprobarExisteRangoFecha($conn, $fechaInicio, $fechaFinal, $idUsuario,
         $stmt = $conn->prepare($query);
         $stmt->bind_param("iiss", $idUsuario, $idTipoObjetivo, $fechaFinal, $fechaInicio);
     } else {
-        $query = "SELECT id FROM objetivosUsuarios 
+        $query = "SELECT id FROM diarioObjetivos 
                   WHERE idUsuario = ? 
                   AND idTipoObjetivo = ?
                   AND fechaInicio <= ? 
@@ -58,7 +58,7 @@ if (isset($_POST["crear"])) {
             //--
             echo "Entro aquí";
 
-            $query = "INSERT INTO objetivosUsuarios (idTipoObjetivo,descripcion, observaciones, fechaInicio, fechaFinal, idUsuario) VALUES (?,?,?,?,?,?)";
+            $query = "INSERT INTO diarioObjetivos (idTipoObjetivo,descripcion, observaciones, fechaInicio, fechaFinal, idUsuario) VALUES (?,?,?,?,?,?)";
             $stmt = $conn->prepare($query);
             $stmt->bind_param(
                 "ssssss",
@@ -97,7 +97,7 @@ if (isset($_POST["crear"])) {
             $conn->begin_transaction();
 
             //En primer lugar se realizan las modificaciones en la tabla alertas
-            $query = "UPDATE objetivosUsuarios SET descripcion=?, observaciones=?, fechaInicio=?, fechaFinal=?, idTipoObjetivo=? WHERE id=?";
+            $query = "UPDATE diarioObjetivos SET descripcion=?, observaciones=?, fechaInicio=?, fechaFinal=?, idTipoObjetivo=? WHERE id=?";
             $stmt = $conn->prepare($query);
             $stmt->bind_param(
                 "ssssss",
@@ -135,7 +135,7 @@ if (isset($_POST["crear"])) {
             $conn->begin_transaction();
 
             //En primer lugar se realizan las modificaciones en la tabla alertas
-            $query = "UPDATE objetivosUsuarios SET descripcion=?, observaciones=?, fechaInicio=?, fechaFinal=?, idTipoObjetivo=? WHERE id=?";
+            $query = "UPDATE diarioObjetivos SET descripcion=?, observaciones=?, fechaInicio=?, fechaFinal=?, idTipoObjetivo=? WHERE id=?";
             $stmt = $conn->prepare($query);
             $stmt->bind_param(
                 "ssssss",
@@ -166,7 +166,7 @@ if (isset($_POST["crear"])) {
     $conn->begin_transaction();
 
     //En primer lugar se realizan las modificaciones en la tabla alertas
-    $query = "DELETE FROM objetivosUsuarios  WHERE id=?";
+    $query = "DELETE FROM diarioObjetivos  WHERE id=?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param(
         "s",

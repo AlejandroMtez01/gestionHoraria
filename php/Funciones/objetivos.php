@@ -139,7 +139,7 @@ function mesConFechas($conn, $idTipoObjetivo, $mes = null, $year = null)
     $idUsuario = $_SESSION["idUsuario"];
 
     // Consulta para obtener todos los objetivos del usuario en el mes actual
-    $consulta = "SELECT * FROM objetivosUsuarios 
+    $consulta = "SELECT * FROM diarioObjetivos 
                 WHERE idUsuario = $idUsuario
                 AND idTipoObjetivo = $idTipoObjetivo
                 AND fechaInicio <= '$fecha_fin' 
