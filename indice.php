@@ -111,7 +111,7 @@ $usuario = obtenerUsuario($conn);
     var botonObjetivo = document.getElementById("addObjetivo");
 
     botonObjetivo.onclick = function(event) {
-        window.location.href = "Formularios/formularioObjetivos.php";
+        window.location.href = "Formularios/formularioDiarioObjetivos.php";
     }
 
     //BOTONES

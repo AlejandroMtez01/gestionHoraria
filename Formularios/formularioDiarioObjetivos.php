@@ -41,7 +41,7 @@ if ($edicion) {
 
     <!-- Modal content -->
     <div class="contenidoModal">
-        <form method="post" action="../Operaciones/operacionesObjetivosUsuarios.php" id="form1" class="formularioEdicion">
+        <form method="post" action="../Operaciones/operacionesDarioObjetivos.php" id="form1" class="formularioEdicion">
 
 
             <div class="logo">
@@ -52,8 +52,15 @@ if ($edicion) {
 
                 <div class="contenidoM">
 
+                    <?php if (isset($filaGeneral["id"])) {
+                    ?>
+                        <h2>Editar Resumen Diario</h2>
 
-                    <h2>Nuevo Resumen Diario</h2>
+                    <?php
+                    } else { ?>
+                        <h2>Nuevo Resumen Diario</h2>
+
+                    <?php } ?>
 
                     </p>
                     <div class="contenedor">

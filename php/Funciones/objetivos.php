@@ -204,7 +204,7 @@ function mesConFechas($conn, $idTipoObjetivo, $mes = null, $year = null)
         if (isset($diasConObjetivo[$dia])) {
             $id = $objetivosPorDia[$dia];
         ?>
-            <div class="calendarioItem"><a class="especial" href="Formularios/formularioObjetivos.php?id=<?php echo $id; ?>"></a></div>
+            <div class="calendarioItem"><a class="especial" href="Formularios/formularioDiarioObjetivos.php?id=<?php echo $id; ?>"></a></div>
         <?php
         } else {
         ?>
