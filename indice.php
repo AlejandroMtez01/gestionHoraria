@@ -58,7 +58,7 @@ $usuario = obtenerUsuario($conn);
                 <span id="bbdd">7</span>
             </div> -->
             <button id="addTipoObjetivo">Añadir Objetivo</button>
-            <button id="addObjetivo">Añadir Plazo</button>
+            <button id="addObjetivo">Añadir Resumen Diario</button>
 
         </div>
         <h3>RESUMEN MENSUAL</h3>
@@ -105,13 +105,13 @@ $usuario = obtenerUsuario($conn);
     var botonTipoObjetivo = document.getElementById("addTipoObjetivo");
 
     botonTipoObjetivo.onclick = function(event) {
-        window.open("Formularios/formularioTipoObjetivos.php");
+        window.location.href = "Formularios/formularioTipoObjetivos.php";
     }
 
     var botonObjetivo = document.getElementById("addObjetivo");
 
     botonObjetivo.onclick = function(event) {
-        window.open("Formularios/formularioObjetivos.php");
+        window.location.href = "Formularios/formularioObjetivos.php";
     }
 
     //BOTONES

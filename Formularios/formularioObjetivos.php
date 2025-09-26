@@ -53,7 +53,7 @@ if ($edicion) {
                 <div class="contenidoM">
 
 
-                    <h2>Nuevo Tipo de Objetivo</h2>
+                    <h2>Nuevo Resumen Diario</h2>
 
                     </p>
                     <div class="contenedor">
