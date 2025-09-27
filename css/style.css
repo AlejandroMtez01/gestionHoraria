@@ -95,6 +95,12 @@ div.panelPrincipal .objetivosMensuales .gridDual .diasMes .diaSem.diaHoy {
 div.panelPrincipal .objetivosMensuales .gridDual .item {
   display: flex;
   align-items: center;
+  border-radius: 7.5px;
+  padding: 5px;
+}
+div.panelPrincipal .objetivosMensuales .gridDual .item a {
+  color: black;
+  text-decoration: none;
 }
 div.panelPrincipal .objetivosMensuales .gridDual .calendario {
   display: flex;

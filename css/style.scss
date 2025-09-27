@@ -103,6 +103,14 @@ div.panelPrincipal {
             .item {
                 display: flex;
                 align-items: center;
+                border-radius: 7.5px;
+                padding: 5px;
+                a{
+                color: black;
+                text-decoration: none;
+
+
+                }
             }
 
             .calendario {
