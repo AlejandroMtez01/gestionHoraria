@@ -46,7 +46,7 @@ if (isset($_POST["crear"])) {
         //-- Comprueba si pasan las validaciones
         if (comprobarExisteRangoFecha($conn, $_POST["fInicio"], $_POST["fFinal"], $_SESSION["idUsuario"], $_POST["tipoObjetivo"]) == true) { //Si no cumple la VALIDACIÓN.
             header(
-                "Location:  /GestionHoraria/Formularios/formularioObjetivos.php?"
+                "Location:  /GestionHoraria/Formularios/formularioDiarioObjetivos.php?"
                     . "&error=<b>ERROR!</b> La fecha que intentas utilizar ya es utilizada completa o parcialmente para algun plazo del objetivo seleccionado."
                     . "&tipoObjetivo=" . $_POST["tipoObjetivo"]
                     . "&descripcion=" . $_POST["descripcion"]
@@ -76,7 +76,7 @@ if (isset($_POST["crear"])) {
 
 
             $conn->commit();
-            header("Location:  /GestionHoraria/Formularios/formularioObjetivos.php?id=" . $id);
+            header("Location:  /GestionHoraria/Formularios/formularioDiarioObjetivos.php?id=" . $id);
         }
     } catch (Exception $e) {
         echo "Error al insertar el registro: " . $e->getMessage() . "<br> Consulta: " . $query;
@@ -89,7 +89,7 @@ if (isset($_POST["crear"])) {
 
         if (comprobarExisteRangoFecha($conn, $_POST["fInicio"], $_POST["fFinal"], $_SESSION["idUsuario"], $_POST["tipoObjetivo"], $_POST["id"]) == true) { //Si no cumple la VALIDACIÓN.
             header(
-                "Location:  /GestionHoraria/Formularios/formularioObjetivos.php?"
+                "Location:  /GestionHoraria/Formularios/formularioDiarioObjetivos.php?"
                     . "&error=<b>ERROR!</b> La fecha que intentas utilizar ya es utilizada completa o parcialmente para algun plazo del objetivo seleccionado."
                     . "&id=" . $_POST["id"]
             );
@@ -114,7 +114,7 @@ if (isset($_POST["crear"])) {
 
 
 
-            header("Location: /GestionHoraria/Formularios/formularioObjetivos.php?id=" . $_POST["id"]);
+            header("Location: /GestionHoraria/Formularios/formularioDiarioObjetivos.php?id=" . $_POST["id"]);
         }
     } catch (Exception $e) {
         echo "Error al insertar el registro: " . $e->getMessage() . "<br> Consulta: " . $query;
@@ -127,7 +127,7 @@ if (isset($_POST["crear"])) {
 
         if (comprobarExisteRangoFecha($conn, $_POST["fInicio"], $_POST["fFinal"], $_SESSION["idUsuario"], $_POST["tipoObjetivo"], $_POST["id"]) == true) { //Si no cumple la VALIDACIÓN.
             header(
-                "Location:  /GestionHoraria/Formularios/formularioObjetivos.php?"
+                "Location:  /GestionHoraria/Formularios/formularioDiarioObjetivos.php?"
                     . "&error=<b>ERROR!</b> La fecha que intentas utilizar ya es utilizada completa o parcialmente para algun plazo del objetivo seleccionado."
                     . "&id=" . $_POST["id"]
             );
