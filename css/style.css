@@ -84,7 +84,7 @@ div.panelPrincipal .objetivosMensuales .gridDual .diasMes .diaSem {
 }
 div.panelPrincipal .objetivosMensuales .gridDual .diasMes .dia.festivo,
 div.panelPrincipal .objetivosMensuales .gridDual .diasMes .diaSem.festivo {
-  background-color: #eeeeee;
+  background-color: #eeeeee !important;
 }
 div.panelPrincipal .objetivosMensuales .gridDual .diasMes .dia.diaHoy,
 div.panelPrincipal .objetivosMensuales .gridDual .diasMes .diaSem.diaHoy {

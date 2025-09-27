@@ -90,7 +90,7 @@ div.panelPrincipal {
                     align-items: center;
 
                     &.festivo {
-                        background-color: #eeeeee;
+                        background-color: #eeeeee !important;
                     }
                     &.diaHoy{
                        border: 1px solid red;
