@@ -101,6 +101,47 @@ $usuario = obtenerUsuario($conn);
 
             </div>
         </div>
+<br>
+        <!-- PLAZOS -->
+         <div class="objetivosMensuales" style="display: none;"> 
+            <!-- EN MANTENIMIENTO A FALTA PONER ÚNICAMENTE LOS PLAZOS -->
+            <h3>DAILY OBJETIVOS</h3>
+            <div class="gridDual">
+                <div class="itemTitulo">Objetivo</div>
+                <div class="calendarioTitulo"><button id="AnteriorMes">←</button> Mes (<?php echo obtenerMesDescripcion($_GET["m"]) . " " . obtenerYear($_GET["y"])  ?>) <button id="SiguienteMes">→</button></div>
+                <div >&nbsp;</div>
+                <div class="diasMes">
+                    <?php diasMes($_GET["m"], $_GET["y"]); ?>
+
+                </div>
+                <div class="item">&nbsp;</div>
+                
+                <div class="diasMes">
+                    <?php diasSemana($_GET["m"], $_GET["y"]); ?>
+                </div>
+                <?php
+                //Obtenemos los items por sesión de usuario
+                $resultadoItems = obtenerTipoObjetivosPorUsuarios($conn) ?>
+
+                <?php
+                while ($fila = $resultadoItems->fetch_assoc()) {
+                ?>
+                    <div class="item">
+                        <a href="Formularios/formularioTipoObjetivos.php?id=<?php echo $fila["id"]; ?>"><?php echo $fila["descripcion"]; ?></a>
+
+                    </div>
+                    <div class="calendario">
+                        <?php mesConFechas($conn, $fila["id"], $_GET["m"], $_GET["y"]); ?>
+                    </div>
+                <?php
+                }
+
+                ?>
+
+
+
+            </div>
+        </div>
     </div>
 </body>
 <script>
