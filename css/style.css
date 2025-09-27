@@ -37,11 +37,11 @@ div.panelPrincipal .estadisticas .estadistica #bbdd {
   font-weight: 600;
 }
 div.panelPrincipal .objetivosMensuales {
-  display: flex;
-  justify-content: center;
+  display: block;
   border: 1px solid rgb(209, 209, 209);
-  padding: 50px;
+  padding: 20px;
   border-radius: 7.5px;
+  margin: auto auto;
 }
 div.panelPrincipal .objetivosMensuales .gridDual {
   display: grid;
@@ -97,6 +97,8 @@ div.panelPrincipal .objetivosMensuales .gridDual .item {
   align-items: center;
   border-radius: 7.5px;
   padding: 5px;
+  height: 50px;
+  width: 200px;
 }
 div.panelPrincipal .objetivosMensuales .gridDual .item a {
   color: black;

@@ -148,15 +148,15 @@ if ($edicion) {
                     <?php
                     if ($edicion) {
                     ?>
-                        <!-- <input type="submit" name="editar" value="Editar">
-                        <input type="submit" name="editar1" value="Editar y Cerrar"> -->
+                        <input type="submit" name="editar" value="Editar">
+                        <input type="submit" name="editar1" value="Editar y Cerrar">
                         <input type="submit" name="eliminar" value="Eliminar">
                         <input type="submit" name="cancelar" value="Cancelar">
 
                     <?php
                     } else {
                     ?>
-                        <!-- <input type="submit" name="crear" value="Crear"> -->
+                        <input type="submit" name="crear" value="Crear">
                         <input type="submit" name="cancelar" value="Cancelar">
                     <?php
                     } ?>

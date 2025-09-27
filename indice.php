@@ -64,15 +64,16 @@ $usuario = obtenerUsuario($conn);
         </div>
         <h3>RESUMEN MENSUAL</h3>
         <div class="objetivosMensuales">
+            <h3>DAILY OBJETIVOS</h3>
             <div class="gridDual">
                 <div class="itemTitulo">Objetivo</div>
                 <div class="calendarioTitulo"><button id="AnteriorMes">←</button> Mes (<?php echo obtenerMesDescripcion($_GET["m"]) . " " . obtenerYear($_GET["y"])  ?>) <button id="SiguienteMes">→</button></div>
-                <div>&nbsp;</div>
+                <div >&nbsp;</div>
                 <div class="diasMes">
                     <?php diasMes($_GET["m"], $_GET["y"]); ?>
 
                 </div>
-                <div>&nbsp;</div>
+                <div class="item">&nbsp;</div>
                 
                 <div class="diasMes">
                     <?php diasSemana($_GET["m"], $_GET["y"]); ?>
