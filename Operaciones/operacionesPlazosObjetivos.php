@@ -4,7 +4,7 @@ include "../php/Funciones.php";
 if (session_status() != PHP_SESSION_ACTIVE) {
     session_start();
 }
-$paginaVuelta = "/GestionHoraria/Formularios/formularioDiarioObjetivos.php";
+$paginaVuelta = "/GestionHoraria/Formularios/formularioPlazosObjetivos.php";
 
 
 //Función para comprobar si el rango ya ha sido elegido
@@ -14,7 +14,7 @@ function comprobarExisteRangoFecha($conn, $fechaInicio, $fechaFinal, $idUsuario,
 {
     if ($excluirId == null) {
 
-        $query = "SELECT id FROM diarioObjetivos 
+        $query = "SELECT id FROM plazosObjetivos 
                   WHERE idUsuario = ? 
                   AND idTipoObjetivo = ?
                   AND fechaInicio <= ? 
@@ -22,7 +22,7 @@ function comprobarExisteRangoFecha($conn, $fechaInicio, $fechaFinal, $idUsuario,
         $stmt = $conn->prepare($query);
         $stmt->bind_param("iiss", $idUsuario, $idTipoObjetivo, $fechaFinal, $fechaInicio);
     } else {
-        $query = "SELECT id FROM diarioObjetivos 
+        $query = "SELECT id FROM plazosObjetivos 
                   WHERE idUsuario = ? 
                   AND idTipoObjetivo = ?
                   AND fechaInicio <= ? 
@@ -59,7 +59,7 @@ if (isset($_POST["crear"])) {
             //--
             echo "Entro aquí";
 
-            $query = "INSERT INTO diarioObjetivos (idTipoObjetivo,descripcion, observaciones, fechaInicio, fechaFinal, idUsuario) VALUES (?,?,?,?,?,?)";
+            $query = "INSERT INTO plazosObjetivos (idTipoObjetivo,descripcion, observaciones, fechaInicio, fechaFinal, idUsuario) VALUES (?,?,?,?,?,?)";
             $stmt = $conn->prepare($query);
             $stmt->bind_param(
                 "ssssss",
@@ -98,8 +98,8 @@ if (isset($_POST["crear"])) {
             $conn->begin_transaction();
 
             //En primer lugar se realizan las modificaciones en la tabla alertas
-            $query = "UPDATE diarioObjetivos SET descripcion=?, observaciones=?, fechaInicio=?, fechaFinal=?, idTipoObjetivo=? WHERE id=?";
-            $stmt = $conn->prepare($query);
+            $query = "UPDATE plazosObjetivos SET descripcion=?, observaciones=?, fechaInicio=?, fechaFinal=?, idTipoObjetivo=? WHERE id=?";
+            $stmt = $conn->prepare(query: $query);
             $stmt->bind_param(
                 "ssssss",
                 $_POST["descripcion"],
@@ -136,7 +136,7 @@ if (isset($_POST["crear"])) {
             $conn->begin_transaction();
 
             //En primer lugar se realizan las modificaciones en la tabla alertas
-            $query = "UPDATE diarioObjetivos SET descripcion=?, observaciones=?, fechaInicio=?, fechaFinal=?, idTipoObjetivo=? WHERE id=?";
+            $query = "UPDATE plazosObjetivos SET descripcion=?, observaciones=?, fechaInicio=?, fechaFinal=?, idTipoObjetivo=? WHERE id=?";
             $stmt = $conn->prepare($query);
             $stmt->bind_param(
                 "ssssss",
@@ -167,7 +167,7 @@ if (isset($_POST["crear"])) {
     $conn->begin_transaction();
 
     //En primer lugar se realizan las modificaciones en la tabla alertas
-    $query = "DELETE FROM diarioObjetivos  WHERE id=?";
+    $query = "DELETE FROM plazosObjetivos  WHERE id=?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param(
         "s",
