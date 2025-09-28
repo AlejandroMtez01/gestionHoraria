@@ -90,7 +90,7 @@ $usuario = obtenerUsuario($conn);
 
                     </div>
                     <div class="calendario">
-                        <?php mesConFechas($conn, $fila["id"], $_GET["m"], $_GET["y"]); ?>
+                        <?php dailyMes($conn, $fila["id"], $_GET["m"], $_GET["y"]); ?>
                     </div>
                 <?php
                 }
@@ -103,9 +103,9 @@ $usuario = obtenerUsuario($conn);
         </div>
 <br>
         <!-- PLAZOS -->
-         <div class="objetivosMensuales" style="display: none;"> 
+         <div class="objetivosMensuales" > 
             <!-- EN MANTENIMIENTO A FALTA PONER ÚNICAMENTE LOS PLAZOS -->
-            <h3>DAILY OBJETIVOS</h3>
+            <h3>PLAZOS OBJETIVOS</h3>
             <div class="gridDual">
                 <div class="itemTitulo">Objetivo</div>
                 <div class="calendarioTitulo"><button id="AnteriorMes">←</button> Mes (<?php echo obtenerMesDescripcion($_GET["m"]) . " " . obtenerYear($_GET["y"])  ?>) <button id="SiguienteMes">→</button></div>
@@ -131,7 +131,7 @@ $usuario = obtenerUsuario($conn);
 
                     </div>
                     <div class="calendario">
-                        <?php mesConFechas($conn, $fila["id"], $_GET["m"], $_GET["y"]); ?>
+                        <?php plazosMes2($conn, $fila["id"], $_GET["m"], $_GET["y"]); ?>
                     </div>
                 <?php
                 }

@@ -21,7 +21,7 @@ include "/GestionHoraria/Utils/Consultas";
 $edicion = isset($_GET["id"]);
 
 if ($edicion) {
-    $consulta = "SELECT * FROM diarioObjetivos WHERE id=" . $_GET["id"];
+    $consulta = "SELECT * FROM plazosObjetivos WHERE id=" . $_GET["id"];
     $resultado = $conn->query($consulta);
     $filaGeneral = $resultado->fetch_assoc();
 } else if (isset($_GET["tipoObjetivo"]) &&  isset($_GET["descripcion"]) &&  isset($_GET["observaciones"]) &&  isset($_GET["fInicio"]) && isset($_GET["fFinal"])) {
@@ -41,7 +41,7 @@ if ($edicion) {
 
     <!-- Modal content -->
     <div class="contenidoModal">
-        <form method="post" action="../Operaciones/operacionesDarioObjetivos.php" id="form1" class="formularioEdicion">
+        <form method="post" action="../Operaciones/operacionesPlazosObjetivos.php" id="form1" class="formularioEdicion">
 
 
             <div class="logo">

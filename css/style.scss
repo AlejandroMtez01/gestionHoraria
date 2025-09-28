@@ -92,10 +92,11 @@ div.panelPrincipal {
                     &.festivo {
                         background-color: #eeeeee !important;
                     }
-                    &.diaHoy{
-                       border: 1px solid red;
-                       font-weight: 600;
-                       background-color: rgb(255, 232, 204);
+
+                    &.diaHoy {
+                        border: 1px solid red;
+                        font-weight: 600;
+                        background-color: rgb(255, 232, 204);
                     }
                 }
             }
@@ -107,9 +108,10 @@ div.panelPrincipal {
                 padding: 5px;
                 height: 50px;
                 width: 200px;
-                a{
-                color: black;
-                text-decoration: none;
+
+                a {
+                    color: black;
+                    text-decoration: none;
 
 
                 }
@@ -122,7 +124,7 @@ div.panelPrincipal {
                 .calendarioItem {
                     width: 40px;
                     height: 40px;
-                    display: flex;
+                    display: flex; //Importante para que funcione plazo quitar y no desquebrajar daily
 
                     justify-content: center;
                     align-items: center;
@@ -130,10 +132,11 @@ div.panelPrincipal {
                     border: 1px solid darkred;
                     border-radius: 3px;
 
-                    &.diaHoy{
+                    &.diaHoy {
                         background-color: rgb(255, 232, 204);
                         border: 1px solid red;
                     }
+
 
                     a {
                         display: flex;
@@ -143,7 +146,9 @@ div.panelPrincipal {
                         height: 100%;
                         margin: 5px;
 
-                        &.especial {
+
+
+                        &.diario {
                             width: 100%;
                             height: 75%;
                             background-color: rgba(255, 220, 220, 0.829);
@@ -155,6 +160,37 @@ div.panelPrincipal {
                                 background-color: rgba(255, 204, 204, 0.829);
 
                             }
+                        }
+                    }
+                }
+
+                .calendarioItem2 {
+                    //Para plazos
+                    width: 40px;
+                    height: 40px;
+                    display: block; //Importante para que funcione plazo quitar y no desquebrajar daily
+
+                    // padding: 15px;
+                    border: 1px solid darkred;
+                    border-radius: 3px;
+
+                    .plazos {
+                        display: flex;
+                        flex-wrap: wrap;
+                        width: 100%;
+                        height: 100%;
+                        margin: 5%;
+                        box-sizing: border-box;
+
+                        a.plazo {
+                            display: flex;
+                            flex-direction: column;
+                            width: 10px;
+                            height: 10px;
+                            border-radius: 2.5px;
+                            background-color: rgba(220, 239, 255, 0.829);
+                            border: 1px solid rgb(63, 0, 0);
+                            margin: 1px 0px;
                         }
                     }
                 }
