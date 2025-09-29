@@ -1,9 +1,11 @@
 body {
   background-color: blanchedalmond;
+  width: 100%;
 }
 
 div.panelPrincipal {
   padding: 10px;
+  overflow: auto;
   background-color: cornsilk;
   border: 1px solid gray;
 }
@@ -37,11 +39,9 @@ div.panelPrincipal .estadisticas .estadistica #bbdd {
   font-weight: 600;
 }
 div.panelPrincipal .objetivosMensuales {
-  display: block;
-  border: 1px solid rgb(209, 209, 209);
   padding: 20px;
-  border-radius: 7.5px;
-  margin: auto auto;
+  border-bottom: 1px solid black;
+  overflow: auto;
 }
 div.panelPrincipal .objetivosMensuales .gridDual {
   display: grid;
