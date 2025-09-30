@@ -164,12 +164,18 @@ $usuario = obtenerUsuario($conn);
     }
 
     //BOTONES
-    botonSiguienteMes = document.getElementById("SiguienteMes");
-    botonAnteriorMes = document.getElementById("AnteriorMes");
+    botonSiguienteMes = document.querySelectorAll("#SiguienteMes");
+    botonAnteriorMes = document.querySelectorAll("#AnteriorMes");
 
-    botonSiguienteMes.onclick = siguienteMes;
+    botonSiguienteMes.forEach(element => {
+        element.onclick = siguienteMes;
+    });
+    // botonSiguienteMes.onclick = siguienteMes;
 
-    botonAnteriorMes.onclick = anteriorMes;
+        botonAnteriorMes.forEach(element => {
+        element.onclick = anteriorMes;
+    });
+    // botonAnteriorMes.onclick = anteriorMes;
 </script>
 
 </html>

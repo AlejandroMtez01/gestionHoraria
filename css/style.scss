@@ -51,11 +51,13 @@ div.panelPrincipal {
         padding: 20px;
         border-bottom: 1px solid black;
         overflow: auto;
+        background-color: rgba(255, 255, 255, 0.514);
+        border-radius: 5px;
 
         .gridDual {
             display: grid;
             gap: 10px;
-            grid-template-columns: 1fr 20fr;
+            grid-template-columns: 1fr 5fr;
 
             .itemTitulo,
             .calendarioTitulo {
