@@ -132,15 +132,15 @@ function diasMes($mes = null, $year = null)
         echo "<div class='dia $diaHoy'><span>$dia</span></div>";
     }
 }
-function obtenerDiasMes($mes=null,$year=null){
-      if ($mes == null) {
+function obtenerDiasMes($mes = null, $year = null)
+{
+    if ($mes == null) {
         $mes = date('n');
     }
     if ($year == null) {
         $year = date('Y');
     }
     return cal_days_in_month(CAL_GREGORIAN, $mes, $year);
-
 }
 
 function dailyMes($conn, $idTipoObjetivo, $mes = null, $year = null)
@@ -492,62 +492,42 @@ function plazosMes3($conn, $idTipoObjetivo, $mes = null, $year = null)
 
     ?>
 
-        <div class="plazos">
-            <?php
+        <?php
 
-            //Si ese día está inicializado (es decir, tiene un valor)
-            if (isset($objetivosPorDia[$dia])) {
-                $objetivosDelDia = $objetivosPorDia[$dia];
-                $copiaDia = $dia;
+        //Si ese día está inicializado (es decir, tiene un valor)
+        if (isset($objetivosPorDia[$dia])) {
+            $objetivosDelDia = $objetivosPorDia[$dia];
+            $copiaDia = $dia;
 
-                foreach ($objetivosDelDia as $clave => $valor) {
-                    if ($objetivosDelDia[$clave]["pintado"] == true) {
-                        $orden++;
+            foreach ($objetivosDelDia as $clave => $valor) {
+                if ($objetivosDelDia[$clave]["pintado"] == true) {
+                    $orden++;
 
-                        // if ($ultimoDia > $dia) {
-                            $margen = "margin-left: " . (45 * --$copiaDia) . "px;";
-                            $margen = $margen . " margin-right: ". ($dias_mes- $objetivosDelDia[$clave]["diasDuracion"]+ ($dia-1))*45 . "px;";
-                        // }
-                        
+                    $margen = "margin-left: " . (45 * --$copiaDia) . "px;";
+                    $margen = $margen . " margin-right: " . ($dias_mes - $objetivosDelDia[$clave]["diasDuracion"] + ($dia - 1)) * 45 . "px;";
 
-                        $id = $objetivosDelDia[$clave]['id']; ?>
-                        <a class="usado" 
-                        href="Formularios/formularioPlazosObjetivos.php?id=<?php echo $id; ?>" 
-                        style='width: <?php echo (45 * $objetivosDelDia[$clave]["diasDuracion"]) . "px; $margen"; ?>'>
-                            <?php echo htmlspecialchars($objetivosDelDia[$clave]["descripcion"])
-                            // ." -  Días Duración (".$objetivosDelDia[$clave]["diasDuracion"].")"
-                            ." - "."Día ".$dia
-                            ." - "."Último día ".$ultimoDia 
-                            // ." - "."Orden ".$orden
-                            ; 
+
+                    $id = $objetivosDelDia[$clave]['id']; ?>
+                    <div class="lineasPlazos">
+                        <a class="usado"
+                            href="Formularios/formularioPlazosObjetivos.php?id=<?php echo $id; ?>"
+                            style='width: <?php echo (45 * $objetivosDelDia[$clave]["diasDuracion"]) . "px; $margen"; ?>'>
+                            <?php echo htmlspecialchars($objetivosDelDia[$clave]["descripcion"]);
                             ?>
                         </a>
-
-                    <?php
-                        $ultimoDia = $objetivosDelDia[$clave]["diasDuracion"]+$dia-1;
-                    } else { //Si no tiene el pintado activado 
-                    ?>
+                    </div>
 
                 <?php
+                    $ultimoDia = $objetivosDelDia[$clave]["diasDuracion"] + $dia - 1;
+                } else { //Si no tiene el pintado activado 
+                ?>
 
-                    }
+            <?php
 
                 }
-
-
-
-                ?>
-            <?php } else if ($dia > $ultimoDia) {
+            }
             ?>
-                <!-- <div class="plazoVacio"></div> -->
-            <?php
-            } else {
-            ?>
-                <!-- <div class="plazoVacio2"></div> -->
-
-            <?php
-            } ?>
-        </div>
+        <?php } ?>
 
 <?php
     }

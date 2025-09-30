@@ -176,33 +176,7 @@ div.panelPrincipal {
                     }
                 }
 
-                .calendarioItem2 {
-                    //Para plazos
-                    width: 40px;
-                    height: 40px;
-                    display: block; //Importante para que funcione plazo quitar y no desquebrajar daily
-
-                    // padding: 15px;
-                    border: 1px solid darkred;
-                    border-radius: 3px;
-
-                    .plazos {
-                        display: flex;
-                        flex-wrap: wrap;
-                        box-sizing: border-box;
-
-                        a.plazo {
-                            display: flex;
-                            flex-direction: column;
-                            width: 10px;
-                            height: 10px;
-                            border-radius: 2.5px;
-                            background-color: rgba(220, 239, 255, 0.829);
-                            border: 1px solid rgb(63, 0, 0);
-                            margin: 1px 0px;
-                        }
-                    }
-                }
+                
             }
 
 
@@ -246,7 +220,6 @@ div.panelPrincipal {
                     align-items: center;
                     color: black;
                     text-decoration: none;
-                    z-index: 1;
 
 
                     &:hover {

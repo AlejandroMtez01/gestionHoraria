@@ -149,28 +149,6 @@ div.panelPrincipal .objetivosMensuales .gridDual .calendario .calendarioItem a.d
   border: 1px solid darkred;
   background-color: rgba(255, 204, 204, 0.829);
 }
-div.panelPrincipal .objetivosMensuales .gridDual .calendario .calendarioItem2 {
-  width: 40px;
-  height: 40px;
-  display: block;
-  border: 1px solid darkred;
-  border-radius: 3px;
-}
-div.panelPrincipal .objetivosMensuales .gridDual .calendario .calendarioItem2 .plazos {
-  display: flex;
-  flex-wrap: wrap;
-  box-sizing: border-box;
-}
-div.panelPrincipal .objetivosMensuales .gridDual .calendario .calendarioItem2 .plazos a.plazo {
-  display: flex;
-  flex-direction: column;
-  width: 10px;
-  height: 10px;
-  border-radius: 2.5px;
-  background-color: rgba(220, 239, 255, 0.829);
-  border: 1px solid rgb(63, 0, 0);
-  margin: 1px 0px;
-}
 div.panelPrincipal .objetivosMensuales .gridDual .calendarioPlazos {
   display: flex;
   flex-wrap: wrap;
@@ -205,7 +183,6 @@ div.panelPrincipal .objetivosMensuales .gridDual .calendarioPlazos .usado {
   align-items: center;
   color: black;
   text-decoration: none;
-  z-index: 1;
 }
 div.panelPrincipal .objetivosMensuales .gridDual .calendarioPlazos .usado:hover {
   border: 2px dashed darkred;
