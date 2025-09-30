@@ -132,6 +132,16 @@ function diasMes($mes = null, $year = null)
         echo "<div class='dia $diaHoy'><span>$dia</span></div>";
     }
 }
+function obtenerDiasMes($mes=null,$year=null){
+      if ($mes == null) {
+        $mes = date('n');
+    }
+    if ($year == null) {
+        $year = date('Y');
+    }
+    return cal_days_in_month(CAL_GREGORIAN, $mes, $year);
+
+}
 
 function dailyMes($conn, $idTipoObjetivo, $mes = null, $year = null)
 {
@@ -476,6 +486,7 @@ function plazosMes3($conn, $idTipoObjetivo, $mes = null, $year = null)
     $dias_mes = cal_days_in_month(CAL_GREGORIAN, $mes, $year);
 
     $ultimoDia = 0;
+    $orden = 0;
     // Recorrer todos los días del mes
     for ($dia = 1; $dia <= $dias_mes; $dia++) {
 
@@ -487,22 +498,29 @@ function plazosMes3($conn, $idTipoObjetivo, $mes = null, $year = null)
             //Si ese día está inicializado (es decir, tiene un valor)
             if (isset($objetivosPorDia[$dia])) {
                 $objetivosDelDia = $objetivosPorDia[$dia];
+                $copiaDia = $dia;
 
                 foreach ($objetivosDelDia as $clave => $valor) {
                     if ($objetivosDelDia[$clave]["pintado"] == true) {
-                        if ($ultimoDia > $objetivosDelDia[$clave]["diasDuracion"]) {
-                            $margen = "margin-left: " . (45 * $dia) . "px";
+                        $orden++;
+                        if ($ultimoDia > $dia) {
+                            $margen = "margin-left: " . (45 * --$copiaDia) . "px;";
                         }
 
                         $id = $objetivosDelDia[$clave]['id']; ?>
                         <a class="usado" 
                         href="Formularios/formularioPlazosObjetivos.php?id=<?php echo $id; ?>" 
-                        style='width: <?php echo 45 * --$objetivosDelDia[$clave]["diasDuracion"] . "px; $margen"; ?>'>
-                            <?php echo htmlspecialchars($objetivosDelDia[$clave]["descripcion"])." -  Días Duración (".$objetivosDelDia[$clave]["diasDuracion"].") - "."Día ".$dia; ?>
+                        style='width: <?php echo (45 * $objetivosDelDia[$clave]["diasDuracion"]) . "px; $margen"; ?>'>
+                            <?php echo htmlspecialchars($objetivosDelDia[$clave]["descripcion"])
+                            ." -  Días Duración (".$objetivosDelDia[$clave]["diasDuracion"].")"
+                            ." - "."Día ".$dia
+                            ." - "."Último día ".$ultimoDia 
+                            ." - "."Orden ".$orden; 
+                            ?>
                         </a>
 
                     <?php
-                        $ultimoDia = $objetivosDelDia[$clave]["diasDuracion"];
+                        $ultimoDia = $objetivosDelDia[$clave]["diasDuracion"]+$dia;
                     } else { //Si no tiene el pintado activado 
                     ?>
 

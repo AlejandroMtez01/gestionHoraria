@@ -130,8 +130,8 @@ $usuario = obtenerUsuario($conn);
                         <a href="Formularios/formularioTipoObjetivos.php?id=<?php echo $fila["id"]; ?>"><?php echo $fila["descripcion"]; ?></a>
 
                     </div>
-                    <div class="calendario">
-                        <?php plazosMes2($conn, $fila["id"], $_GET["m"], $_GET["y"]); ?>
+                    <div class="calendarioPlazos <?php echo"d".  obtenerDiasMes($_GET["m"], $_GET["y"]); ?>">
+                        <?php plazosMes3($conn, $fila["id"], $_GET["m"], $_GET["y"]); ?>
                     </div>
                 <?php
                 }
