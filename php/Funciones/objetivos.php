@@ -396,8 +396,140 @@ function plazosMes2($conn, $idTipoObjetivo, $mes = null, $year = null)
             </div>
         </div>
 
+    <?php
+    }
+}
+function plazosMes3($conn, $idTipoObjetivo, $mes = null, $year = null)
+{
+    if ($mes == null) {
+        $mes = date('n');
+    }
+    if ($year == null) {
+        $year = date('Y');
+    }
+    // Fecha de inicio del mes (primer día)
+    $fecha_inicio = date("$year-$mes-01");
+
+    // Fecha de fin del mes (último día)
+    $fecha_fin = date("Y-m-t", strtotime("$year-$mes-01"));
+
+    // Obtener el ID del usuario de la sesión
+    $idUsuario = $_SESSION["idUsuario"];
+
+    // Consulta para obtener todos los objetivos del usuario en el mes actual
+    $consulta = "SELECT * FROM plazosObjetivos 
+                WHERE idUsuario = $idUsuario
+                AND idTipoObjetivo = $idTipoObjetivo
+                AND fechaInicio <= '$fecha_fin' 
+                AND fechaFinal >= '$fecha_inicio'";
+
+    // Ejecutar la consulta UNA SOLA VEZ
+    $resultado = $conn->query($consulta);
+
+    // Crear un array para almacenar los objetivos por día
+    $objetivosPorDia = array();
+
+    while ($fila = $resultado->fetch_assoc()) {
+        $fechaInicio = new DateTime($fila["fechaInicio"]);
+        $fechaFinal = new DateTime($fila["fechaFinal"]);
+        $idObjetivo = $fila["id"];
+        $descripcion = $fila["descripcion"]; // Asumiendo que hay un campo nombre
+
+        // Determinar qué parte del objetivo cae dentro del mes actual
+        $inicioMes = new DateTime($fecha_inicio);
+        $finMes = new DateTime($fecha_fin);
+
+        // El rango a mostrar es la intersección entre el objetivo y el mes
+        $inicioMostrar = ($fechaInicio > $inicioMes) ? $fechaInicio : $inicioMes;
+        $finMostrar = ($fechaFinal < $finMes) ? $fechaFinal : $finMes;
+
+
+        // Marcar todos los días del rango que cae dentro del mes
+        $intervalo = DateInterval::createFromDateString('1 day');
+        $periodo = new DatePeriod($inicioMostrar, $intervalo, $finMostrar->modify('+1 day'));
+
+        $intervalo = $inicioMostrar->diff($finMostrar);
+        $diasDuracion = $intervalo->days + 1; // Duración total en días (incluye ambos extremos)
+
+
+        $pintado = true;
+        foreach ($periodo as $fecha) {
+            $dia = (int)$fecha->format('d');
+
+            // Inicializar el array para este día si no existe
+            if (!isset($objetivosPorDia[$dia])) {
+                $objetivosPorDia[$dia] = array();
+            }
+
+            // Agregar el objetivo al día correspondiente
+            $objetivosPorDia[$dia][] = array(
+                'id' => $idObjetivo,
+                'descripcion' => $descripcion,
+                'pintado' => $pintado,
+                'diasDuracion' => --$diasDuracion
+            );
+            $pintado = false;
+        }
+    }
+
+    // Obtener información del mes actual
+    $dias_mes = cal_days_in_month(CAL_GREGORIAN, $mes, $year);
+
+    $ultimoDia = 0;
+    // Recorrer todos los días del mes
+    for ($dia = 1; $dia <= $dias_mes; $dia++) {
+
+    ?>
+
+        <div class="plazos">
+            <?php
+
+            //Si ese día está inicializado (es decir, tiene un valor)
+            if (isset($objetivosPorDia[$dia])) {
+                $objetivosDelDia = $objetivosPorDia[$dia];
+
+                foreach ($objetivosDelDia as $clave => $valor) {
+                    if ($objetivosDelDia[$clave]["pintado"] == true) {
+                        if ($ultimoDia > $objetivosDelDia[$clave]["diasDuracion"]) {
+                            $margen = "margin-left: " . (45 * $dia) . "px";
+                        }
+
+                        $id = $objetivosDelDia[$clave]['id']; ?>
+                        <a class="usado" 
+                        href="Formularios/formularioPlazosObjetivos.php?id=<?php echo $id; ?>" 
+                        style='width: <?php echo 45 * --$objetivosDelDia[$clave]["diasDuracion"] . "px; $margen"; ?>'>
+                            <?php echo htmlspecialchars($objetivosDelDia[$clave]["descripcion"])." -  Días Duración (".$objetivosDelDia[$clave]["diasDuracion"].") - "."Día ".$dia; ?>
+                        </a>
+
+                    <?php
+                        $ultimoDia = $objetivosDelDia[$clave]["diasDuracion"];
+                    } else { //Si no tiene el pintado activado 
+                    ?>
+
+                <?php
+                    }
+                }
+
+
+
+                ?>
+            <?php } else if ($dia > $ultimoDia) {
+            ?>
+                <div class="plazoVacio"></div>
+            <?php
+            } else {
+            ?>
+                <div class="plazoVacio2"></div>
+
+            <?php
+            } ?>
+        </div>
+
 <?php
     }
 }
+
+
+
 
 ?>

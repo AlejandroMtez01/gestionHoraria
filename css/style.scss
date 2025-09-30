@@ -1,6 +1,7 @@
 body {
     background-color: blanchedalmond;
-    width: 100%;
+    width: 95%;
+    margin: auto auto;
 
 }
 
@@ -10,6 +11,7 @@ div.panelPrincipal {
 
     background-color: cornsilk;
     border: 1px solid gray;
+    border-radius: 5px;
 
     h3 {
         text-align: center;
@@ -196,6 +198,55 @@ div.panelPrincipal {
                         }
                     }
                 }
+            }
+
+
+            // SEPARACIÓN PLAZOS
+
+            .calendarioPlazos {
+                display: flex;
+                flex-wrap: wrap;
+
+
+                .usado {
+                    background-color: rgb(255, 224, 224);
+                    width: 45px;
+                    height: 40px;
+                    margin: 5px 0px;
+                    border-radius: 7.5px;
+                    display: flex; //Importante para que funcione plazo quitar y no desquebrajar daily
+
+                    justify-content: center;
+                    align-items: center;
+                        color: black;
+                        text-decoration: none;
+                }
+
+                .plazo {
+                    min-width: 45px;
+
+                }
+
+                .plazoVacio {
+                    width: 43px;
+                    height: 40px;
+                    display: flex; //Importante para que funcione plazo quitar y no desquebrajar daily
+
+                    justify-content: center;
+                    align-items: center;
+                    // background-color: rgb(233, 255, 233);
+                }
+                 .plazoVacio2 {
+                    width: 43px;
+                    height: 40px;
+                    display: flex; //Importante para que funcione plazo quitar y no desquebrajar daily
+
+                    justify-content: center;
+                    align-items: center;
+                    // background-color: red;
+                }
+
+
             }
         }
     }
