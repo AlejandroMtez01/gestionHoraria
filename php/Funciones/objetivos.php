@@ -431,8 +431,7 @@ function plazosMes3($conn, $idTipoObjetivo, $mes = null, $year = null)
                 WHERE idUsuario = $idUsuario
                 AND idTipoObjetivo = $idTipoObjetivo
                 AND fechaInicio <= '$fecha_fin' 
-                AND fechaFinal >= '$fecha_inicio'
-                ORDER BY fechaInicio DESC";
+                AND fechaFinal >= '$fecha_inicio'";
 
     // Ejecutar la consulta UNA SOLA VEZ
     $resultado = $conn->query($consulta);
