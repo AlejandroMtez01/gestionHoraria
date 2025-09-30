@@ -503,11 +503,11 @@ function plazosMes3($conn, $idTipoObjetivo, $mes = null, $year = null)
                 foreach ($objetivosDelDia as $clave => $valor) {
                     if ($objetivosDelDia[$clave]["pintado"] == true) {
                         $orden++;
-                        $ultimoDia = $objetivosDelDia[$clave]["diasDuracion"]+$dia;
 
-                        if ($ultimoDia > $dia) {
+                        // if ($ultimoDia > $dia) {
                             $margen = "margin-left: " . (45 * --$copiaDia) . "px;";
-                        }
+                            $margen = $margen . " margin-right: ". ($dias_mes- $objetivosDelDia[$clave]["diasDuracion"]+ ($dia-1))*45 . "px;";
+                        // }
                         
 
                         $id = $objetivosDelDia[$clave]['id']; ?>
@@ -516,19 +516,22 @@ function plazosMes3($conn, $idTipoObjetivo, $mes = null, $year = null)
                         style='width: <?php echo (45 * $objetivosDelDia[$clave]["diasDuracion"]) . "px; $margen"; ?>'>
                             <?php echo htmlspecialchars($objetivosDelDia[$clave]["descripcion"])
                             // ." -  Días Duración (".$objetivosDelDia[$clave]["diasDuracion"].")"
-                            // ." - "."Día ".$dia
-                            // ." - "."Último día ".$ultimoDia 
+                            ." - "."Día ".$dia
+                            ." - "."Último día ".$ultimoDia 
                             // ." - "."Orden ".$orden
                             ; 
                             ?>
                         </a>
 
                     <?php
+                        $ultimoDia = $objetivosDelDia[$clave]["diasDuracion"]+$dia-1;
                     } else { //Si no tiene el pintado activado 
                     ?>
 
                 <?php
+
                     }
+
                 }
 
 
@@ -536,11 +539,11 @@ function plazosMes3($conn, $idTipoObjetivo, $mes = null, $year = null)
                 ?>
             <?php } else if ($dia > $ultimoDia) {
             ?>
-                <div class="plazoVacio"></div>
+                <!-- <div class="plazoVacio"></div> -->
             <?php
             } else {
             ?>
-                <div class="plazoVacio2"></div>
+                <!-- <div class="plazoVacio2"></div> -->
 
             <?php
             } ?>

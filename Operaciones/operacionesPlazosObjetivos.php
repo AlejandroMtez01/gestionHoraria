@@ -47,13 +47,7 @@ if (isset($_POST["crear"])) {
 } else if (isset($_POST["editar"])) {
     try {
 
-        if (comprobarExisteRangoFecha($conn, $_POST["fInicio"], $_POST["fFinal"], $_SESSION["idUsuario"], $_POST["tipoObjetivo"], $_POST["id"]) == true) { //Si no cumple la VALIDACIÓN.
-            header(
-                "Location:  $paginaVuelta?"
-                    . "&error=<b>ERROR!</b> La fecha que intentas utilizar ya es utilizada completa o parcialmente para algun plazo del objetivo seleccionado."
-                    . "&id=" . $_POST["id"]
-            );
-        } else {
+      
             $conn->begin_transaction();
 
             //En primer lugar se realizan las modificaciones en la tabla alertas
@@ -75,7 +69,6 @@ if (isset($_POST["crear"])) {
 
 
             header("Location: $paginaVuelta?id=" . $_POST["id"]);
-        }
     } catch (Exception $e) {
         echo "Error al insertar el registro: " . $e->getMessage() . "<br> Consulta: " . $query;
         $conn->rollback();
