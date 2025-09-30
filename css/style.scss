@@ -84,6 +84,7 @@ div.panelPrincipal {
 
                 .dia,
                 .diaSem {
+                    box-sizing: border-box;
                     padding: 15px;
                     border: 1px solid gray;
                     width: 10px;
@@ -92,6 +93,9 @@ div.panelPrincipal {
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    width: 42px;
+                    height: 42px;
+                    
 
                     &.festivo {
                         background-color: #eeeeee !important;
@@ -124,10 +128,12 @@ div.panelPrincipal {
             .calendario {
                 display: flex;
                 gap: 3px;
+                margin-left: 4px;
 
                 .calendarioItem {
-                    width: 40px;
-                    height: 40px;
+                    box-sizing: border-box;
+                    width: 42px;
+                    height: 42px;
                     display: flex; //Importante para que funcione plazo quitar y no desquebrajar daily
 
                     justify-content: center;

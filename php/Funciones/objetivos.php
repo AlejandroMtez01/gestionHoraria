@@ -431,7 +431,8 @@ function plazosMes3($conn, $idTipoObjetivo, $mes = null, $year = null)
                 WHERE idUsuario = $idUsuario
                 AND idTipoObjetivo = $idTipoObjetivo
                 AND fechaInicio <= '$fecha_fin' 
-                AND fechaFinal >= '$fecha_inicio'";
+                AND fechaFinal >= '$fecha_inicio'
+                ORDER BY fechaInicio DESC";
 
     // Ejecutar la consulta UNA SOLA VEZ
     $resultado = $conn->query($consulta);
@@ -503,24 +504,27 @@ function plazosMes3($conn, $idTipoObjetivo, $mes = null, $year = null)
                 foreach ($objetivosDelDia as $clave => $valor) {
                     if ($objetivosDelDia[$clave]["pintado"] == true) {
                         $orden++;
+                        $ultimoDia = $objetivosDelDia[$clave]["diasDuracion"]+$dia;
+
                         if ($ultimoDia > $dia) {
                             $margen = "margin-left: " . (45 * --$copiaDia) . "px;";
                         }
+                        
 
                         $id = $objetivosDelDia[$clave]['id']; ?>
                         <a class="usado" 
                         href="Formularios/formularioPlazosObjetivos.php?id=<?php echo $id; ?>" 
                         style='width: <?php echo (45 * $objetivosDelDia[$clave]["diasDuracion"]) . "px; $margen"; ?>'>
                             <?php echo htmlspecialchars($objetivosDelDia[$clave]["descripcion"])
-                            ." -  Días Duración (".$objetivosDelDia[$clave]["diasDuracion"].")"
-                            ." - "."Día ".$dia
-                            ." - "."Último día ".$ultimoDia 
-                            ." - "."Orden ".$orden; 
+                            // ." -  Días Duración (".$objetivosDelDia[$clave]["diasDuracion"].")"
+                            // ." - "."Día ".$dia
+                            // ." - "."Último día ".$ultimoDia 
+                            // ." - "."Orden ".$orden
+                            ; 
                             ?>
                         </a>
 
                     <?php
-                        $ultimoDia = $objetivosDelDia[$clave]["diasDuracion"]+$dia;
                     } else { //Si no tiene el pintado activado 
                     ?>
 

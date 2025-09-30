@@ -75,6 +75,7 @@ div.panelPrincipal .objetivosMensuales .gridDual .diasMes {
 }
 div.panelPrincipal .objetivosMensuales .gridDual .diasMes .dia,
 div.panelPrincipal .objetivosMensuales .gridDual .diasMes .diaSem {
+  box-sizing: border-box;
   padding: 15px;
   border: 1px solid gray;
   width: 10px;
@@ -83,6 +84,8 @@ div.panelPrincipal .objetivosMensuales .gridDual .diasMes .diaSem {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 42px;
+  height: 42px;
 }
 div.panelPrincipal .objetivosMensuales .gridDual .diasMes .dia.festivo,
 div.panelPrincipal .objetivosMensuales .gridDual .diasMes .diaSem.festivo {
@@ -109,10 +112,12 @@ div.panelPrincipal .objetivosMensuales .gridDual .item a {
 div.panelPrincipal .objetivosMensuales .gridDual .calendario {
   display: flex;
   gap: 3px;
+  margin-left: 4px;
 }
 div.panelPrincipal .objetivosMensuales .gridDual .calendario .calendarioItem {
-  width: 40px;
-  height: 40px;
+  box-sizing: border-box;
+  width: 42px;
+  height: 42px;
   display: flex;
   justify-content: center;
   align-items: center;
