@@ -443,7 +443,8 @@ function plazosMes3($conn, $idTipoObjetivo, $mes = null, $year = null)
         $fechaInicio = new DateTime($fila["fechaInicio"]);
         $fechaFinal = new DateTime($fila["fechaFinal"]);
         $idObjetivo = $fila["id"];
-        $descripcion = $fila["descripcion"]; // Asumiendo que hay un campo nombre
+        $descripcion = $fila["descripcion"];
+        $observaciones = $fila["observaciones"]; 
 
         // Determinar qué parte del objetivo cae dentro del mes actual
         $inicioMes = new DateTime($fecha_inicio);
@@ -475,6 +476,7 @@ function plazosMes3($conn, $idTipoObjetivo, $mes = null, $year = null)
             $objetivosPorDia[$dia][] = array(
                 'id' => $idObjetivo,
                 'descripcion' => $descripcion,
+                'observaciones' => $observaciones,
                 'pintado' => $pintado,
                 'diasDuracion' => --$diasDuracion
             );
@@ -510,9 +512,10 @@ function plazosMes3($conn, $idTipoObjetivo, $mes = null, $year = null)
                     $id = $objetivosDelDia[$clave]['id']; ?>
                     <div class="lineasPlazos">
                         <a class="usado"
+                            data-tooltip="<?php echo $objetivosDelDia[$clave]["observaciones"]; ?>"
                             href="Formularios/formularioPlazosObjetivos.php?id=<?php echo $id; ?>"
                             style='width: <?php echo (45 * $objetivosDelDia[$clave]["diasDuracion"]) . "px; $margen"; ?>'>
-                            <?php echo htmlspecialchars($objetivosDelDia[$clave]["descripcion"]);
+                            <?php echo $objetivosDelDia[$clave]["descripcion"];
                             ?>
                         </a>
                     </div>

@@ -98,6 +98,20 @@ if ($edicion) {
                             <div><span>Observaciones</span></div>
                             <div class="grid">
                                 <textarea name="observaciones" rows="6" id=""><?php existeVariableMostrar($filaGeneral["observaciones"]) ?></textarea>
+                                <div id="menuPersonalizado" class="menu-contextual">
+
+                                    <div class="menu-opcion" onclick="ejecutarAccion('mayusculas')">Mayúsculas</div>
+                                    <div class="menu-opcion" onclick="ejecutarAccion('minusculas')">Minúsculas</div>
+                                    <div class="menu-opcion" onclick="ejecutarAccion('capitalizacion')">Capitalización</div>
+                                    <hr>
+                                    <div class="menu-opcion" onclick="ejecutarAccion('lista')">Lista</div>
+                                    <div class="menu-opcion" onclick="ejecutarAccion('sublista')">Sublista</div>
+                                    <!-- Cuando tenga https -->
+                                    <!-- <hr>
+                                    <div class="menu-opcion" onclick="ejecutarAccion('copiar')">Copiar</div>
+                                    <div class="menu-opcion" onclick="ejecutarAccion('pegar')">Pegar</div> -->
+
+                                </div>
                             </div>
                         </div>
                         <div class="grid-dual">
@@ -182,4 +196,145 @@ if ($edicion) {
     fFinal = document.querySelectorAll("[name='fFinal']")[0];
 
     copiarAlSalir(fInicio, fFinal);
+
+    textArea = document.querySelector("textarea");
+    textArea.addEventListener('contextmenu', function(event) {
+        event.preventDefault();
+        /// 2. Llama a tu función para mostrar el menú personalizado
+        mostrarMenuPersonalizado(event.clientX, event.clientY);
+    });
+
+    function mostrarMenuPersonalizado(x, y) {
+        // Aquí iría el código para mostrar tu menú personalizado
+        console.log(`Clic derecho en la posición: (${x}, ${y})`);
+        // Ejemplo: mostrar un div con las opciones
+        const menu = document.getElementById('menuPersonalizado');
+        menu.style.left = `${x}px`;
+        menu.style.top = `${y}px`;
+        menu.style.display = 'block';
+    }
+
+    function transformarSeleccion(transformador) {
+        const textArea = document.querySelector('textarea');
+
+        const inicio = textArea.selectionStart;
+        const final = textArea.selectionEnd;
+        const textoCompleto = textArea.value;
+        const textoSeleccionado = textoCompleto.substring(inicio, final);
+
+        if (textoSeleccionado.length === 0) return; // No hacer nada si no hay texto
+
+        // 1. Aplica la función de transformación
+        const textoTransformado = transformador(textoSeleccionado);
+
+        // 2. Reemplaza el texto seleccionado con el texto transformado
+        const nuevoTexto =
+            textoCompleto.substring(0, inicio) +
+            textoTransformado +
+            textoCompleto.substring(final);
+
+        textArea.value = nuevoTexto;
+
+        // 3. Vuelve a seleccionar el texto transformado (opcional, para feedback)
+        textArea.selectionStart = inicio;
+        textArea.selectionEnd = inicio + textoTransformado.length;
+    }
+
+
+    function ejecutarAccion(accion) {
+        //Para todos los métodos.
+        const textArea = document.querySelector('textarea');
+        inicio = textArea.selectionStart;
+        final = textArea.selectionEnd;
+
+        // Extraer la subcadena (el texto seleccionado) usando las posiciones
+        const textoSeleccionado = textArea.value.substring(inicio, final);
+
+
+
+
+        switch (accion) {
+            case 'copiar':
+                // Comando para copiar el texto seleccionado
+                if (textoSeleccionado.length > 0) {
+                    console.log("Copiada selección: \n" + textoSeleccionado);
+                } else {
+                    const textoSeleccionado = textArea.value;
+                    console.log("Copiado todo el textArea: \n" + textoSeleccionado);
+                }
+                navigator.clipboard.writeText("Este es el texto a copiar")
+                    .then(() => {
+                        console.log('Contenido copiado al portapapeles');
+                        /* Resuelto - texto copiado al portapapeles con éxito */
+                    }, () => {
+                        console.error('Error al copiar');
+                        /* Rechazado - fallo al copiar el texto al portapapeles */
+                    });
+                break;
+            case 'mayusculas':
+                transformarSeleccion(texto => texto.toUpperCase());
+
+                break;
+            case 'minusculas':
+                transformarSeleccion(texto => texto.toLowerCase());
+
+                break;
+            case 'capitalizacion':
+                transformarSeleccion(texto => {
+                    return texto.toLowerCase().split(' ').map(word => {
+                        return word.charAt(0).toUpperCase() + word.slice(1);
+                    }).join(' ');
+                });
+                break;
+            case 'lista':
+                transformarSeleccion(texto => {
+                    const prefijo = '- '; // Prefijo fijo para lista simple
+
+                    // Separa el texto por líneas, limpia espacios y elimina líneas vacías
+                    const lineas = texto
+                        .split('\n')
+                        .map(line => line.trim())
+                        .filter(line => line.length > 0);
+
+                    // Añade el prefijo a cada línea y une con saltos de línea
+                    return lineas.map(line => prefijo + line).join('\n');
+                });
+
+
+                break;
+            case 'sublista':
+                transformarSeleccion(texto => {
+                    const prefijo = '- '; // Prefijo fijo para lista simple
+
+                    // Separa el texto por líneas, limpia espacios y elimina líneas vacías
+                    const lineas = texto
+                        .split('\n')
+                        .map(line => line.trim())
+                        .filter(line => line.length > 0);
+
+                    // Añade el prefijo a cada línea y une con saltos de línea
+                    return lineas.map(line => "  → " + line).join('\n');
+                });
+
+                break;
+            default:
+                console.log(`Acción desconocida: ${accion}`);
+        }
+        const menu = document.getElementById('menuPersonalizado');
+
+        menu.style.display = 'none';
+
+
+        // Oculta el menú después de la acción
+        document.getElementById('menuPersonalizado').style.display = 'none';
+    }
+    document.addEventListener('click', function(event) {
+        // Asegúrate de que el clic no fue dentro del menú personalizado
+        const menu = document.getElementById('menuPersonalizado');
+
+        if (!menu.contains(event.target)) {
+
+            menu.style.display = 'none';
+        }
+    });
 </script>

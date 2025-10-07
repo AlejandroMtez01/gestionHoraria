@@ -68,13 +68,13 @@ $usuario = obtenerUsuario($conn);
             <div class="gridDual">
                 <div class="itemTitulo">Objetivo</div>
                 <div class="calendarioTitulo"><button id="AnteriorMes">←</button> Mes (<?php echo obtenerMesDescripcion($_GET["m"]) . " " . obtenerYear($_GET["y"])  ?>) <button id="SiguienteMes">→</button></div>
-                <div >&nbsp;</div>
+                <div>&nbsp;</div>
                 <div class="diasMes">
                     <?php diasMes($_GET["m"], $_GET["y"]); ?>
 
                 </div>
                 <div class="item">&nbsp;</div>
-                
+
                 <div class="diasMes">
                     <?php diasSemana($_GET["m"], $_GET["y"]); ?>
                 </div>
@@ -101,21 +101,21 @@ $usuario = obtenerUsuario($conn);
 
             </div>
         </div>
-<br>
+        <br>
         <!-- PLAZOS -->
-         <div class="objetivosMensuales" > 
+        <div class="objetivosMensuales">
             <!-- EN MANTENIMIENTO A FALTA PONER ÚNICAMENTE LOS PLAZOS -->
             <h3>PLAZOS OBJETIVOS</h3>
             <div class="gridDual">
                 <div class="itemTitulo">Objetivo</div>
                 <div class="calendarioTitulo"><button id="AnteriorMes">←</button> Mes (<?php echo obtenerMesDescripcion($_GET["m"]) . " " . obtenerYear($_GET["y"])  ?>) <button id="SiguienteMes">→</button></div>
-                <div >&nbsp;</div>
+                <div>&nbsp;</div>
                 <div class="diasMes">
                     <?php diasMes($_GET["m"], $_GET["y"]); ?>
 
                 </div>
                 <div class="item">&nbsp;</div>
-                
+
                 <div class="diasMes">
                     <?php diasSemana($_GET["m"], $_GET["y"]); ?>
                 </div>
@@ -130,7 +130,7 @@ $usuario = obtenerUsuario($conn);
                         <a href="Formularios/formularioTipoObjetivos.php?id=<?php echo $fila["id"]; ?>"><?php echo $fila["descripcion"]; ?></a>
 
                     </div>
-                    <div class="calendarioPlazos <?php echo"d".  obtenerDiasMes($_GET["m"], $_GET["y"]); ?>">
+                    <div class="calendarioPlazos <?php echo "d" .  obtenerDiasMes($_GET["m"], $_GET["y"]); ?>">
                         <?php plazosMes3($conn, $fila["id"], $_GET["m"], $_GET["y"]); ?>
                     </div>
                 <?php
@@ -157,7 +157,7 @@ $usuario = obtenerUsuario($conn);
         window.location.href = "Formularios/formularioDiarioObjetivos.php";
     }
 
-        var botonPlazo = document.getElementById("addPlazo");
+    var botonPlazo = document.getElementById("addPlazo");
 
     botonPlazo.onclick = function(event) {
         window.location.href = "Formularios/formularioPlazosObjetivos.php";
@@ -170,12 +170,12 @@ $usuario = obtenerUsuario($conn);
     botonSiguienteMes.forEach(element => {
         element.onclick = siguienteMes;
     });
-    // botonSiguienteMes.onclick = siguienteMes;
 
-        botonAnteriorMes.forEach(element => {
+    botonAnteriorMes.forEach(element => {
         element.onclick = anteriorMes;
     });
-    // botonAnteriorMes.onclick = anteriorMes;
+
+
 </script>
 
 </html>
