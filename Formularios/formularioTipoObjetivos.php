@@ -67,7 +67,7 @@ if ($edicion) {
                         <div class="subContenido">
                             <div><span>Descripcion</span></div>
                             <div class="grid">
-                                <textarea name="descripcion" id=""><?php existeVariableMostrar($filaGeneral["observaciones"]) ?></textarea>
+                                <textarea name="descripcion" rows="10" id=""><?php existeVariableMostrar($filaGeneral["observaciones"]) ?></textarea>
                             </div>
                         </div>
                         <div class="grid-dual">
